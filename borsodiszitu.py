@@ -71,40 +71,40 @@ HP_font = pygame.font.SysFont("comicsant", 40)
 
 
 #Import/scale images
-UPMOVE1_IMAGE = pygame.image.load("forwardmove1.png")
+UPMOVE1_IMAGE = pygame.image.load(os.path.join("images", "forwardmove1.png"))
 UPMOVE1 = pygame.transform.scale(UPMOVE1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
-LEFTMOVE1_IMAGE = pygame.image.load("leftmove1.png")
+LEFTMOVE1_IMAGE = pygame.image.load(os.path.join("images", "leftmove1.png"))
 LEFTMOVE1 = pygame.transform.scale(LEFTMOVE1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
-DOWNMOVE1_IMAGE = pygame.image.load("backmove1.png")
+DOWNMOVE1_IMAGE = pygame.image.load(os.path.join("images", "backmove1.png"))
 DOWNMOVE1 = pygame.transform.scale(DOWNMOVE1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
-RIGHTMOVE1_IMAGE = pygame.image.load("rightmove1.png")
+RIGHTMOVE1_IMAGE = pygame.image.load(os.path.join("images", "rightmove1.png"))
 RIGHTMOVE1 = pygame.transform.scale(RIGHTMOVE1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
-C_X_IMAGE = pygame.image.load("c_x.png")
+C_X_IMAGE = pygame.image.load(os.path.join("images", "c_x.png"))
 C_X = pygame.transform.scale(C_X_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
-frm_IMAGE = pygame.image.load("frm.png")
+frm_IMAGE = pygame.image.load(os.path.join("images", "frm.png"))
 FRM = pygame.transform.scale(frm_IMAGE, (WIDTH, HEIGHT))
 
 CURRENTRIGHT = DOWNMOVE1
 
 #ability images
 
-SPEED_IMAGE = pygame.image.load("speedboost.png")
+SPEED_IMAGE = pygame.image.load(os.path.join("images", "speedboost.png"))
 SPEED = pygame.transform.scale(SPEED_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
 
-HEAL_IMAGE = pygame.image.load("heal.png")
+HEAL_IMAGE = pygame.image.load(os.path.join("images", "heal.png"))
 HEAL = pygame.transform.scale(HEAL_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
 
-FREEZE_IMAGE = pygame.image.load("freeze.png")
+FREEZE_IMAGE = pygame.image.load(os.path.join("images", "freeze.png"))
 FREEZE = pygame.transform.scale(FREEZE_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
 
 
-MOB_IMAGE = pygame.image.load("mob.png")
+MOB_IMAGE = pygame.image.load(os.path.join("images", "mob.png"))
 MOB = pygame.transform.scale(MOB_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
 
-MOB_DEAD_IMAGE = pygame.image.load("mob_dead.png")
+MOB_DEAD_IMAGE = pygame.image.load(os.path.join("images", "mob_dead.png"))
 MOB_DEAD = pygame.transform.scale(MOB_DEAD_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
 
-BACKGROUND_IMAGE = pygame.image.load("background.jpg")
+BACKGROUND_IMAGE = pygame.image.load(os.path.join("images", "background.jpg"))
 BACKGROUND = pygame.transform.scale(BACKGROUND_IMAGE, (WIDTH, HEIGHT))
 
 
@@ -338,6 +338,7 @@ while run:
             right.y = 100
             CURRENTRIGHT = DOWNMOVE1
 
+    #mob spawna
     if lvl == 1:
         mob2_dmg = 0
         mob3_dmg = 0
