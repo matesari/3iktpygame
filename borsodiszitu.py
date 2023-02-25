@@ -68,7 +68,15 @@ mob3_y = random.randrange(50, 450)
 
 HP_font = pygame.font.SysFont("comicsant", 40)
 
-
+if lvl == 1:
+    randomnum = random.randrange(1,3)
+    print(randomnum)
+elif lvl == 2:
+    randomnum = random.randrange(1,3)
+    print(randomnum)
+elif lvl > 2:
+    randomnum = random.randrange(1,3)
+    print(randomnum)
 
 #Import/scale images
 UPMOVE1_IMAGE = pygame.image.load(os.path.join("images", "forwardmove1.png"))
@@ -107,6 +115,13 @@ MOB_DEAD = pygame.transform.scale(MOB_DEAD_IMAGE, (CHARACTER_WIDTH, CHARACTER_HE
 BACKGROUND_IMAGE = pygame.image.load(os.path.join("images", "background.jpg"))
 BACKGROUND = pygame.transform.scale(BACKGROUND_IMAGE, (WIDTH, HEIGHT))
 
+CHEST_IMAGE = pygame.image.load(os.path.join("images", "chest.png"))
+CHEST = pygame.transform.scale(CHEST_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
+
+CHEST_OPENED_IMAGE = pygame.image.load(os.path.join("images", "chest_opened.png"))
+CHEST_OPENED = pygame.transform.scale(CHEST_OPENED_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
+
+opened = False
 
 CURRENTMOB1 = MOB
 CURRENTMOB2 = MOB
@@ -116,15 +131,17 @@ MOB_WIDTH = 60
 MOB_HEIGHT = 50
 
 #ability
-ABILITY_TYPE = random.randrange(5)
+ABILITY_TYPE = random.randrange(1, 3)
 
-DROP_X = random.randrange(750)
-DROP_Y = random.randrange(300)
+DROP_X = 400
+DROP_Y = 300
 
 DROP_HEIGHT = 30
 DROP_WIDTH = 30
 ABILITY1 = pygame.Rect(DROP_X, DROP_Y, DROP_HEIGHT, DROP_WIDTH)
 
+chest_x = 400
+chest_y = 200
 
 
 #Rajzok
@@ -133,12 +150,25 @@ def rajzok(right):
 
     WIN.blit(BACKGROUND, (0, 0))
 
-    if ABILITY_TYPE == 1:
-        WIN.blit(SPEED, (DROP_X, DROP_Y)) 
-    elif ABILITY_TYPE == 2: 
-        WIN.blit(HEAL, (DROP_X, DROP_Y))
-    elif ABILITY_TYPE == 3:
-        WIN.blit(FREEZE, (DROP_X, DROP_Y))
+    if lvl == 1:
+        if mob1_hp < 0:
+            if opened == False:
+                WIN.blit(CHEST, (chest_x, chest_y))
+            elif opened == True:
+                WIN.blit(CHEST_OPENED, (400, 200))
+    if lvl == 2:
+        if  mob1_hp < 0 and mob2_hp < 0:
+            if opened == False:
+                WIN.blit(CHEST, (400, 200))
+            elif opened == True:
+                WIN.blit(CHEST_OPENED, (400, 200))
+            
+    if lvl > 2:
+        if mob1_hp < 0 and mob2_hp < 0 and mob3_hp < 0:
+            if opened == False:
+                WIN.blit(CHEST, (400, 200))
+            elif opened == True:
+                WIN.blit(CHEST_OPENED, (400, 200))
 
     if lvl == 1:
         WIN.blit(CURRENTMOB1, (mob1_x, mob1_y))
@@ -182,6 +212,8 @@ def rajzok(right):
     pygame.display.update()
 
 #main gam
+chest = pygame.Rect(chest_x, chest_y, CHARACTER_WIDTH, CHARACTER_HEIGHT)
+chest_opened = pygame.Rect(400, 200, CHARACTER_WIDTH, CHARACTER_HEIGHT)
 right = pygame.Rect(700, 100, CHARACTER_WIDTH, CHARACTER_HEIGHT)
 mob1 = pygame.Rect(mob1_x, mob1_y, MOB_WIDTH, MOB_HEIGHT)
 mob2 = pygame.Rect(mob2_x, mob2_y, MOB_WIDTH, MOB_HEIGHT)
@@ -204,6 +236,7 @@ while run:
         mob3_dmg == 0
         if right.x < 7:
             if 245 > right.y > 170:
+                opened = False
                 mob1_x = random.randrange(900)
                 mob1_y = random.randrange(400)
                 mob2_x = random.randrange(900)
@@ -243,6 +276,7 @@ while run:
                 VEL_MOB1 = 1
                 VEL_MOB2 = 1
                 VEL_MOB3 = 1
+                opened = False
 
                 right.x = 20
                 right.y = 200
@@ -271,6 +305,7 @@ while run:
                 right.x = 350
                 right.y = 400
                 lvl = lvl + 1
+                opened = False
                 time.sleep(0.5)
 
     #down w
@@ -295,6 +330,7 @@ while run:
                 right.x = 350
                 right.y = 20
                 lvl = lvl + 1
+                opened = False
                 time.sleep(0.5)
     
     if right.x - 50 < mob1_x < right.x + 50 and right.y - 90 < mob1_y < right.y + 50 or right.x == mob1_x and right.y == mob1_y:
@@ -317,7 +353,42 @@ while run:
             mob3_dmg == 0    
         else:
             HP = HP - mob3_dmg
-            
+
+
+    if lvl == 1:
+        if mob1_hp < 0:
+            if right.colliderect(chest):
+                opened = True
+                if randomnum == 1:
+                    while VEL_RIGHT < 5:
+                        VEL_RIGHT = VEL_RIGHT + 1
+                elif randomnum == 2:
+                    HP = HP + 50
+                    if HP > 100:
+                        HP = 100
+                    
+    if lvl == 2:
+        if mob1_hp < 0 and mob2_hp < 0:
+            if right.colliderect(chest):
+                opened = True
+                if randomnum == 1:
+                    while VEL_RIGHT < 5:
+                        VEL_RIGHT = VEL_RIGHT + 1
+                elif randomnum == 2:
+                    HP = HP + 50
+                    if HP > 100:
+                        HP = 100
+    if lvl > 2:
+        if mob1_hp < 0 and mob2_hp < 0 and mob3_hp < 0:
+            if right.colliderect(chest):
+                opened = True
+                if randomnum == 1:
+                    while VEL_RIGHT < 5:
+                        VEL_RIGHT = VEL_RIGHT + 1
+                elif randomnum == 2:
+                    HP = HP + 50
+                    if HP > 100:
+                        HP = 100
     if HP < 0:
         CURRENTRIGHT = C_X
         VEL_RIGHT = VEL_RIGHT - VEL_RIGHT 
@@ -393,21 +464,7 @@ while run:
             mob3_x += VEL_MOB3
     
     #jobb ability control
-    if DROP_X - 35 < right.x < DROP_X and DROP_Y - 35 < right.y < DROP_Y + 35:
-        if ABILITY_TYPE == 1:
-            VEL_RIGHT = VEL_RIGHT + 2
-            SPEED.fill(TRANSPARENT)
-        elif ABILITY_TYPE == 2:
-            HP = HP + 50
-            if HP > 100:
-                HP = 100
-            HEAL.fill(TRANSPARENT)
-        elif ABILITY_TYPE == 3:
-            VEL_MOB1 = VEL_MOB1 - VEL_MOB1
-            VEL_MOB2 = VEL_MOB2 - VEL_MOB2  
-            VEL_MOB3 = VEL_MOB3 - VEL_MOB3
-            FREEZE.fill(TRANSPARENT)
-        DROP_X = 9000 
+    
 
 
     keys_pressed = pygame.key.get_pressed()
