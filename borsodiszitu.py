@@ -67,16 +67,9 @@ mob3_y = random.randrange(50, 450)
 
 
 HP_font = pygame.font.SysFont("comicsant", 40)
-
-if lvl == 1:
-    randomnum = random.randrange(1,3)
-    print(randomnum)
-elif lvl == 2:
-    randomnum = random.randrange(1,3)
-    print(randomnum)
-elif lvl > 2:
-    randomnum = random.randrange(1,3)
-    print(randomnum)
+dmg_up_txt = False
+hp_up_txt = False
+speed_up_txt = False
 
 #Import/scale images
 UPMOVE1_IMAGE = pygame.image.load(os.path.join("images", "forwardmove1.png"))
@@ -199,7 +192,11 @@ def rajzok(right):
     right_hp_txt = HP_font.render("Hp: " + str(HP), 1, WHITE)
     WIN.blit(CURRENTRIGHT, (right.x, right.y))
     WIN.blit(FRM, (0, 0))
-    lvlup_txt = HP_font.render("lvl: " + str(lvl), 1, WHITE)
+    lvlup_txt = HP_font.render("Level: " + str(lvl), 1, WHITE)
+    dmg_txt = HP_font.render("Damage: " + str(right_dmg), 1, WHITE)
+    speed_txt = HP_font.render("Speed: " + str(VEL_RIGHT), 1, WHITE)
+    WIN.blit(dmg_txt, (40, 10))
+    WIN.blit(speed_txt, (250, 10))
     WIN.blit(lvlup_txt, (800, 10))
     
     if gameover == True:
@@ -229,109 +226,125 @@ while run:
             run = False
 
 
-    
-    if mob1_hp and mob2_hp and mob1_hp < 0:
-        mob1_dmg == 0
-        mob2_dmg == 0
-        mob3_dmg == 0
-        if right.x < 7:
-            if 245 > right.y > 170:
-                opened = False
-                mob1_x = random.randrange(900)
-                mob1_y = random.randrange(400)
-                mob2_x = random.randrange(900)
-                mob2_y = random.randrange(400)
-                mob3_x = random.randrange(900)
-                mob3_y = random.randrange(400)
-                CURRENTMOB1 = MOB
-                CURRENTMOB2 = MOB
-                CURRENTMOB3 = MOB
-                VEL_MOB1 = 1
-                VEL_MOB2 = 1
-                VEL_MOB3 = 1
-                mob1_hp = 100
-                mob2_hp = 100
-                mob3_hp = 100
-                right.x = 750
-                right.y = 200
-                lvl = lvl + 1
-                time.sleep(0.5)
+    if lvl < 5:
+        if mob1_hp and mob2_hp and mob1_hp < 0:
+            mob1_dmg == 0
+            mob2_dmg == 0
+            mob3_dmg == 0
+            if right.x < 7:
+                if 245 > right.y > 170:
+                    opened = False
+                    mob1_x = random.randrange(900)
+                    mob1_y = random.randrange(400)
+                    mob2_x = random.randrange(900)
+                    mob2_y = random.randrange(400)
+                    mob3_x = random.randrange(900)
+                    mob3_y = random.randrange(400)
+                    CURRENTMOB1 = MOB
+                    CURRENTMOB2 = MOB
+                    CURRENTMOB3 = MOB
+                    VEL_MOB1 = 1
+                    VEL_MOB2 = 1
+                    VEL_MOB3 = 1
+                    mob1_hp = 100
+                    mob2_hp = 100
+                    mob3_hp = 100
+                    right.x = 750
+                    right.y = 200
+                    lvl = lvl + 1
+                    random_drop = random.randrange(1,4)
+                    print(random_drop)
+                    dmg_up_txt = False
+                    hp_up_txt = False
+                    speed_up_txt = False
+                    time.sleep(0.5)
     
     #right w
-    if mob1_hp and mob2_hp and mob1_hp < 0:
-        if right.x > 780:
-            if 245 > right.y > 170:
-                mob1_x = random.randrange(900)
-                mob1_y = random.randrange(400)
-                mob2_x = random.randrange(900)
-                mob2_y = random.randrange(400)
-                mob3_x = random.randrange(900)
-                mob3_y = random.randrange(400)
-                mob1_hp = 100
-                mob2_hp = 100
-                mob3_hp = 100
-                CURRENTMOB1 = MOB
-                CURRENTMOB2 = MOB
-                CURRENTMOB3 = MOB
-                VEL_MOB1 = 1
-                VEL_MOB2 = 1
-                VEL_MOB3 = 1
-                opened = False
+    if lvl < 5:
+        if mob1_hp and mob2_hp and mob1_hp < 0:
+            if right.x > 780:
+                if 245 > right.y > 170:
+                    mob1_x = random.randrange(900)
+                    mob1_y = random.randrange(400)
+                    mob2_x = random.randrange(900)
+                    mob2_y = random.randrange(400)
+                    mob3_x = random.randrange(900)
+                    mob3_y = random.randrange(400)
+                    mob1_hp = 100
+                    mob2_hp = 100
+                    mob3_hp = 100
+                    CURRENTMOB1 = MOB
+                    CURRENTMOB2 = MOB
+                    CURRENTMOB3 = MOB
+                    VEL_MOB1 = 1
+                    VEL_MOB2 = 1
+                    VEL_MOB3 = 1
+                    hp_up_txt = False
+                    speed_up_txt = False
+                    dmg_up_txt = False
+                    opened = False
+                    random_drop = random.randrange(1,4)
+                    print(random_drop)
+                   
+                    right.x = 20
+                    right.y = 200
+                    lvl = lvl + 1
+                    time.sleep(0.5)
 
-                right.x = 20
-                right.y = 200
-                lvl = lvl + 1
-                time.sleep(0.5)
-
-    #up w
-    if mob1_hp and mob2_hp and mob1_hp < 0:
-        if right.y < 0:
-            if 400 > right.x > 300:
-                mob1_x = random.randrange(900)
-                mob1_y = random.randrange(400)
-                mob2_x = random.randrange(900)
-                mob2_y = random.randrange(400)
-                mob3_x = random.randrange(900)
-                mob3_y = random.randrange(400)
-                CURRENTMOB1 = MOB
-                CURRENTMOB2 = MOB
-                CURRENTMOB3 = MOB
-                VEL_MOB1 = 1
-                VEL_MOB2 = 1
-                VEL_MOB3 = 1
-                mob1_hp = 100
-                mob2_hp = 100
-                mob3_hp = 100
-                right.x = 350
-                right.y = 400
-                lvl = lvl + 1
-                opened = False
-                time.sleep(0.5)
+    if lvl < 5:
+        if mob1_hp and mob2_hp and mob1_hp < 0:
+            if right.y < 0:
+                if 400 > right.x > 300:
+                    mob1_x = random.randrange(900)
+                    mob1_y = random.randrange(400)
+                    mob2_x = random.randrange(900)
+                    mob2_y = random.randrange(400)
+                    mob3_x = random.randrange(900)
+                    mob3_y = random.randrange(400)
+                    CURRENTMOB1 = MOB
+                    CURRENTMOB2 = MOB
+                    CURRENTMOB3 = MOB
+                    VEL_MOB1 = 1
+                    VEL_MOB2 = 1
+                    VEL_MOB3 = 1
+                    mob1_hp = 100
+                    mob2_hp = 100
+                    mob3_hp = 100
+                    right.x = 350
+                    right.y = 400
+                    lvl = lvl + 1
+                    random_drop = random.randrange(1,4)
+                    print(random_drop)
+                    opened = False
+                    time.sleep(0.5)
 
     #down w
-    if mob1_hp and mob2_hp and mob1_hp < 0:
-        if right.y > 410:
-            if 400 > right.x > 300:
-                mob1_x = random.randrange(900)
-                mob1_y = random.randrange(400)
-                mob2_x = random.randrange(900)
-                mob2_y = random.randrange(400)
-                mob3_x = random.randrange(900)
-                mob3_y = random.randrange(400)
-                CURRENTMOB1 = MOB
-                CURRENTMOB2 = MOB
-                CURRENTMOB3 = MOB
-                VEL_MOB1 = 1
-                VEL_MOB2 = 1
-                VEL_MOB3 = 1
-                mob1_hp = 100
-                mob2_hp = 100
-                mob3_hp = 100
-                right.x = 350
-                right.y = 20
-                lvl = lvl + 1
-                opened = False
-                time.sleep(0.5)
+    if lvl < 5:
+        if mob1_hp and mob2_hp and mob1_hp < 0:
+            if right.y > 410:
+                if 400 > right.x > 300:
+                    mob1_x = random.randrange(900)
+                    mob1_y = random.randrange(400)
+                    mob2_x = random.randrange(900)
+                    mob2_y = random.randrange(400)
+                    mob3_x = random.randrange(900)
+                    mob3_y = random.randrange(400)
+                    CURRENTMOB1 = MOB
+                    CURRENTMOB2 = MOB
+                    CURRENTMOB3 = MOB
+                    VEL_MOB1 = 1
+                    VEL_MOB2 = 1
+                    VEL_MOB3 = 1
+                    mob1_hp = 100
+                    mob2_hp = 100
+                    mob3_hp = 100
+                    right.x = 350
+                    right.y = 20
+                    lvl = lvl + 1
+                    random_drop = random.randrange(1,4)
+                    print(random_drop)
+                    opened = False
+                    time.sleep(0.5)
     
     if right.x - 50 < mob1_x < right.x + 50 and right.y - 90 < mob1_y < right.y + 50 or right.x == mob1_x and right.y == mob1_y:
         if mob1_hp < 0:
@@ -354,41 +367,63 @@ while run:
         else:
             HP = HP - mob3_dmg
 
-
     if lvl == 1:
         if mob1_hp < 0:
             if right.colliderect(chest):
                 opened = True
-                if randomnum == 1:
-                    while VEL_RIGHT < 5:
-                        VEL_RIGHT = VEL_RIGHT + 1
-                elif randomnum == 2:
-                    HP = HP + 50
-                    if HP > 100:
-                        HP = 100
+                while VEL_RIGHT < 5:
+                    VEL_RIGHT = VEL_RIGHT + 1
                     
     if lvl == 2:
         if mob1_hp < 0 and mob2_hp < 0:
             if right.colliderect(chest):
-                opened = True
-                if randomnum == 1:
-                    while VEL_RIGHT < 5:
-                        VEL_RIGHT = VEL_RIGHT + 1
-                elif randomnum == 2:
-                    HP = HP + 50
-                    if HP > 100:
-                        HP = 100
+                if random_drop == 1:
+                    if opened != True:
+                        VEL_RIGHT += 0.3
+                        speed_up_txt = True
+                        print(VEL_RIGHT)
+                        opened = True
+                    else:
+                        pass
+                elif random_drop == 2:
+                    if opened != True:
+                        HP += 50
+                        hp_up_txt = True
+                        opened = True
+                    else:
+                        pass
+                elif random_drop == 3:
+                    if opened != True:
+                        right_dmg += 0.2
+                        print(right_dmg)
+                        dmg_up_txt = True
+                        opened = True
+                    else:
+                        pass
+                    
     if lvl > 2:
         if mob1_hp < 0 and mob2_hp < 0 and mob3_hp < 0:
             if right.colliderect(chest):
-                opened = True
-                if randomnum == 1:
-                    while VEL_RIGHT < 5:
-                        VEL_RIGHT = VEL_RIGHT + 1
-                elif randomnum == 2:
-                    HP = HP + 50
-                    if HP > 100:
-                        HP = 100
+                if random_drop == 1:
+                    if opened != True:
+                        VEL_RIGHT += 0.3
+                        print(VEL_RIGHT)
+                        opened = True
+                    else:
+                        pass
+                elif random_drop == 2:
+                    if opened != True:
+                        HP += 50
+                        opened = True
+                    else:
+                        pass
+                elif random_drop == 3:
+                    if opened != True:
+                        right_dmg += 0.2
+                        print(right_dmg)
+                        opened = True
+                    else:
+                        pass
     if HP < 0:
         CURRENTRIGHT = C_X
         VEL_RIGHT = VEL_RIGHT - VEL_RIGHT 
