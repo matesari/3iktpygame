@@ -2,8 +2,10 @@ import pygame
 import os
 import random
 import time
-pygame.font.init()
+from pygame import mixer
 
+
+pygame.font.init()
 pygame.font.init()
 pygame.mixer.init()
 
@@ -14,9 +16,6 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 TRANSPARENT = (0, 0, 0, 0)
-
-right_hit = pygame.USEREVENT + 1
-
 HP = 100
 lvl = 1
 mob1_hp = 100
@@ -73,9 +72,9 @@ dmg_up_txt = False
 hp_up_txt = False
 speed_up_txt = False
 
-x = int(input("Cheatcode:"))
-if x == 5:
-    lvl = 5
+#x = int(input("Cheatcode:"))
+#if x == 5:
+#    lvl = 5
 
 #Import/scale images
 UPMOVE1_IMAGE = pygame.image.load(os.path.join("images", "forwardmove1.png"))
@@ -188,7 +187,6 @@ def rajzok(right):
             elif opened == True:
                 WIN.blit(CHEST_OPENED, (400, 200))
 
-
     if lvl == 1:
         WIN.blit(CURRENTMOB1, (mob1_x, mob1_y))
         pygame.draw.rect(WIN, WHITE, (mob1_x , mob1_y - 30, hp_bar_width, hp_bar_height))
@@ -250,8 +248,21 @@ def rajzok(right):
 
     pygame.display.update()
 
+    
+if lvl < 5:
+    mixer.music.load(os.path.join("images", "chill.wav"))
+    mixer.music.set_volume(0.5)
+    mixer.music.play(-1)
+    
+
+mob_death_sound = mixer.Sound(os.path.join("images", "mobdeathsound.wav"))
+mob_death_sound.set_volume(1)
+chest_open_sound = mixer.Sound(os.path.join("images", "chestopen.wav"))
+chest_open_sound.set_volume(1)
+
+
 #main gam
-chest = pygame.Rect(400, 200, CHARACTER_WIDTH, CHARACTER_HEIGHT)
+chest = pygame.Rect(400, 200, CHARACTER_WIDTH // 2, CHARACTER_HEIGHT// 2)
 chest_opened = pygame.Rect(400, 200, CHARACTER_WIDTH, CHARACTER_HEIGHT)
 right = pygame.Rect(700, 100, CHARACTER_WIDTH, CHARACTER_HEIGHT)
 mob1 = pygame.Rect(mob1_x, mob1_y, MOB_WIDTH, MOB_HEIGHT)
@@ -259,15 +270,49 @@ mob2 = pygame.Rect(mob2_x, mob2_y, MOB_WIDTH, MOB_HEIGHT)
 mob3 = pygame.Rect(mob3_x, mob3_y, MOB_WIDTH, MOB_HEIGHT)
 boss = pygame.Rect(boss_x, boss_y, CHARACTER_HEIGHT * 2, CHARACTER_HEIGHT * 2)
 run = True
-
+opened_sound = False
 
 while run:
     clock.tick(FPS)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+        
 
+    if lvl == 1:
+        if mob1_hp < 0:
+            if right.colliderect(chest):
+                if opened_sound == False:
+                    for i in range(100):
+                        i += 1
+                    chest_open_sound.play()
+                    opened_sound = True
+                else:
+                    pass
+    if lvl == 2:
+        if mob1_hp < 0 and mob2_hp < 0:
+            if right.colliderect(chest):
+                if opened_sound == False:
+                    for i in range(100):
+                        i += 1
+                    chest_open_sound.play()
+                    opened_sound = True
+                else:
+                    pass
     
+    if lvl > 2:
+        if mob1_hp < 0 and mob2_hp < 0 and mob3_hp < 0:
+            if right.colliderect(chest):
+                if opened_sound == False:
+                    for i in range(100):
+                        i += 1
+                    chest_open_sound.play()
+                    opened_sound = True
+                else:
+                    pass
+
+
+
     #right w
     if lvl < 4:
         if mob1_hp and mob2_hp and mob1_hp < 0:
@@ -297,6 +342,7 @@ while run:
                     speed_up_txt = False
                     dmg_up_txt = False
                     opened = False
+                    opened_sound = False
                     random_drop = random.randrange(1,4)
                     print(random_drop)
     elif lvl == 4:
@@ -317,6 +363,11 @@ while run:
                     VEL_MOB2 = 0
                     VEL_MOB3 = 0
                     boss_hp = 200
+                    pygame.mixer.music.stop()
+                    mixer.music.load(os.path.join("images", "lvl4music.wav"))
+                    mixer.music.set_volume(0.5)
+                    mixer.music.play(-1)
+                    opened_sound = False
                     CURRENTMOB1.fill(TRANSPARENT)
                     CURRENTMOB2.fill(TRANSPARENT)
                     CURRENTMOB3.fill(TRANSPARENT)
@@ -341,6 +392,7 @@ while run:
                     CURRENTMOB1 = MOB
                     CURRENTMOB2 = MOB
                     CURRENTMOB3 = MOB
+                    opened_sound = False
                     HP = HP + 25
                     VEL_MOB1 = 1.3
                     VEL_MOB2 = 1.3
@@ -379,6 +431,7 @@ while run:
                     speed_up_txt = False
                     dmg_up_txt = False
                     opened = False
+                    opened_sound = False
                     random_drop = random.randrange(1,4)
                     print(random_drop)
 
@@ -643,6 +696,7 @@ while run:
                 if mob1_y + 0 > right.y > mob1_y - 70:
                     mob1_hp = mob1_hp - right_dmg
                     if mob1_hp < 0:
+                        mob_death_sound.play()
                         CURRENTMOB1 = MOB_DEAD
                         mob1_dmg = 0
                         VEL_MOB1 = 0
@@ -652,6 +706,7 @@ while run:
                 if right.y - 30< mob1_y < right.y + 30:
                     mob1_hp = mob1_hp - right_dmg
                     if mob1_hp < 0:
+                        mob_death_sound.play()
                         CURRENTMOB1 = MOB_DEAD
                         mob1_dmg = 0
                         VEL_MOB1 = 0
@@ -661,6 +716,7 @@ while run:
                 if right.y - 30< mob1_y < right.y + 30:
                     mob1_hp = mob1_hp - right_dmg
                     if mob1_hp < 0:
+                        mob_death_sound.play()
                         CURRENTMOB1 = MOB_DEAD
                         mob1_dmg = 0
                         VEL_MOB1 = 0
@@ -670,6 +726,7 @@ while run:
                 if mob1_y + 70 > right.y > mob1_y:
                     mob1_hp = mob1_hp - right_dmg
                     if mob1_hp < 0:
+                        mob_death_sound.play()
                         CURRENTMOB1 = MOB_DEAD
                         mob1_dmg = 0
                         VEL_MOB1 = 0
@@ -681,6 +738,7 @@ while run:
                 if mob2_y + 0 > right.y > mob2_y - 70:
                     mob2_hp = mob2_hp - right_dmg
                     if mob2_hp < 0:
+                        mob_death_sound.play()
                         CURRENTMOB2 = MOB_DEAD
                         mob2_dmg = 0
                         VEL_MOB2 = 0
@@ -690,6 +748,7 @@ while run:
                 if right.y - 30< mob2_y < right.y + 30:
                     mob2_hp = mob2_hp - right_dmg
                     if mob2_hp < 0:
+                        mob_death_sound.play()
                         CURRENTMOB2 = MOB_DEAD
                         mob2_dmg = 0
                         VEL_MOB2 = 0
@@ -699,6 +758,7 @@ while run:
                 if right.y - 30< mob2_y < right.y + 30:
                     mob2_hp = mob2_hp - right_dmg
                     if mob2_hp < 0:
+                        mob_death_sound.play()
                         CURRENTMOB2 = MOB_DEAD
                         mob2_dmg = 0
                         VEL_MOB2 = 0
@@ -708,6 +768,7 @@ while run:
                 if mob2_y + 70 > right.y > mob2_y:
                     mob2_hp = mob2_hp - right_dmg
                     if mob2_hp < 0:
+                        mob_death_sound.play()
                         CURRENTMOB2 = MOB_DEAD
                         mob2_dmg = 0
                         VEL_MOB2 = 0
@@ -718,6 +779,7 @@ while run:
                 if mob3_y + 0 > right.y > mob3_y - 70:
                     mob3_hp = mob3_hp - right_dmg
                     if mob3_hp < 0:
+                        mob_death_sound.play()
                         CURRENTMOB3 = MOB_DEAD
                         mob3_dmg = 0
                         VEL_MOB3 = 0
@@ -727,6 +789,7 @@ while run:
                 if right.y - 30< mob3_y < right.y + 30:
                     mob3_hp = mob3_hp - right_dmg
                     if mob3_hp < 0:
+                        mob_death_sound.play()
                         CURRENTMOB3 = MOB_DEAD
                         mob3_dmg = 0
                         VEL_MOB3 = 0
@@ -736,6 +799,7 @@ while run:
                 if right.y - 30< mob3_y < right.y + 30:
                     mob3_hp = mob3_hp - right_dmg
                     if mob3_hp < 0:
+                        mob_death_sound.play()
                         CURRENTMOB3 = MOB_DEAD
                         mob3_dmg = 0
                         VEL_MOB3 = 0
@@ -745,6 +809,7 @@ while run:
                 if mob3_y + 70 > right.y > mob3_y:
                     mob3_hp = mob3_hp - right_dmg
                     if mob3_hp < 0:
+                        mob_death_sound.play()
                         CURRENTMOB3 = MOB_DEAD
                         mob3_dmg = 0
                         VEL_MOB3 = 0
