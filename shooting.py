@@ -24,11 +24,16 @@ mob3_hp = 100
 
 gameover = False
 
+mob1_hit = pygame.USEREVENT + 1
+mob2_hit = pygame.USEREVENT + 2
+mob3_hit = pygame.USEREVENT + 3
 
 right_dmg = 1
 mob1_dmg = 0.1
 mob2_dmg = 0
 mob3_dmg = 0
+
+next_shot = 0
 
 max_mob1_health = 100
 max_mob2_health = 100
@@ -38,6 +43,7 @@ max_boss_health = 200
 hp_bar_width = 100
 hp_bar_height = 10
 
+count = 1000
 
 #random beallitasok
 WIDTH, HEIGHT = 900, 500
@@ -66,6 +72,20 @@ mob3_x = random.randrange(50, 850)
 mob3_y = random.randrange(50, 450)
 
 boss_hp = 200
+
+i = 0
+
+bullets = []
+VEL_BULLETS = 4
+max_bullets = 3
+
+def handle_bullets(bullets, right, mob1):
+    for bullet in bullets:
+        bullet.x += VEL_BULLETS
+        if mob1.colliderect(bullet):
+            pygame.event.post(pygame.event.Event(mob1_hit))
+            bullets.remove(bullet)
+
 
 HP_font = pygame.font.SysFont("comicsant", 40)
 dmg_up_txt = False
@@ -151,10 +171,8 @@ boss_y = 200
 boss_dmg = 0
 VEL_BOSS = 0.5
 
-#Rajzok
-def rajzok(right):
-    
 
+def rajzok(right, bullets):
     WIN.blit(BACKGROUND, (0, 0))
 
     if lvl == 1:
@@ -235,6 +253,8 @@ def rajzok(right):
     WIN.blit(dmg_txt, (40, 10))
     WIN.blit(speed_txt, (250, 10))
     WIN.blit(lvlup_txt, (750, 10))
+    for bullet in bullets:
+        pygame.draw.rect(WIN, RED, bullet)
     
     if gameover == True:
         game_over_txt = HP_font.render("meghaltál", 1, WHITE)
@@ -275,6 +295,12 @@ while run:
         if event.type == pygame.QUIT:
             run = False
         
+
+    #if event.type == pygame.KEYDOWN:
+    #    print("true")
+    #    if event.key == pygame.K_SPACE and len(bullets) < max_bullets:
+    #        bullet = pygame.Rect(right.x, right.y, 10, 5)
+    #        bullets.append(bullet)
 
     if lvl == 1:
         if mob1_hp < 0:
@@ -686,168 +712,25 @@ while run:
         else:
             CURRENTRIGHT = DOWNMOVE1
         
-    
+    i += 1
+
     if keys_pressed[pygame.K_SPACE]:
-        if look == "down":
-            if mob1_x + 30 > right.x > mob1_x - 30:
-                if mob1_y + 0 > right.y > mob1_y - 70:
-                    mob1_hp = mob1_hp - right_dmg
-                    if mob1_hp < 0:
-                        mob_death_sound.play()
-                        CURRENTMOB1 = MOB_DEAD
-                        mob1_dmg = 0
-                        VEL_MOB1 = 0
+        if i > next_shot:
+            bullet = pygame.Rect(right.x, right.y, 15, 5)
+            bullets.append(bullet)
+            next_shot = i + 30
+            print(i, next_shot)
+        else:
+            pass
+            
 
-        elif look == "right":
-            if mob1_x - 70 < right.x < mob1_x: 
-                if right.y - 30< mob1_y < right.y + 30:
-                    mob1_hp = mob1_hp - right_dmg
-                    if mob1_hp < 0:
-                        mob_death_sound.play()
-                        CURRENTMOB1 = MOB_DEAD
-                        mob1_dmg = 0
-                        VEL_MOB1 = 0
+        
+        
 
-        elif look == "left":
-            if mob1_x + 70 > right.x > mob1_x:
-                if right.y - 30< mob1_y < right.y + 30:
-                    mob1_hp = mob1_hp - right_dmg
-                    if mob1_hp < 0:
-                        mob_death_sound.play()
-                        CURRENTMOB1 = MOB_DEAD
-                        mob1_dmg = 0
-                        VEL_MOB1 = 0
-
-        elif look == "up":
-            if mob1_x + 30 > right.x > mob1_x - 30:
-                if mob1_y + 70 > right.y > mob1_y:
-                    mob1_hp = mob1_hp - right_dmg
-                    if mob1_hp < 0:
-                        mob_death_sound.play()
-                        CURRENTMOB1 = MOB_DEAD
-                        mob1_dmg = 0
-                        VEL_MOB1 = 0
-
-    #
-    if keys_pressed[pygame.K_SPACE]:
-        if look == "down":
-            if mob2_x + 30 > right.x > mob2_x - 30:
-                if mob2_y + 0 > right.y > mob2_y - 70:
-                    mob2_hp = mob2_hp - right_dmg
-                    if mob2_hp < 0:
-                        mob_death_sound.play()
-                        CURRENTMOB2 = MOB_DEAD
-                        mob2_dmg = 0
-                        VEL_MOB2 = 0
-
-        elif look == "right":
-            if mob2_x - 70 < right.x < mob2_x: 
-                if right.y - 30< mob2_y < right.y + 30:
-                    mob2_hp = mob2_hp - right_dmg
-                    if mob2_hp < 0:
-                        mob_death_sound.play()
-                        CURRENTMOB2 = MOB_DEAD
-                        mob2_dmg = 0
-                        VEL_MOB2 = 0
-
-        elif look == "left":
-            if mob2_x + 70 > right.x > mob2_x:
-                if right.y - 30< mob2_y < right.y + 30:
-                    mob2_hp = mob2_hp - right_dmg
-                    if mob2_hp < 0:
-                        mob_death_sound.play()
-                        CURRENTMOB2 = MOB_DEAD
-                        mob2_dmg = 0
-                        VEL_MOB2 = 0
-
-        elif look == "up":
-            if mob2_x + 30 > right.x > mob2_x - 30:
-                if mob2_y + 70 > right.y > mob2_y:
-                    mob2_hp = mob2_hp - right_dmg
-                    if mob2_hp < 0:
-                        mob_death_sound.play()
-                        CURRENTMOB2 = MOB_DEAD
-                        mob2_dmg = 0
-                        VEL_MOB2 = 0
-    
-    if keys_pressed[pygame.K_SPACE]:
-        if look == "down":
-            if mob3_x + 30 > right.x > mob3_x - 30:
-                if mob3_y + 0 > right.y > mob3_y - 70:
-                    mob3_hp = mob3_hp - right_dmg
-                    if mob3_hp < 0:
-                        mob_death_sound.play()
-                        CURRENTMOB3 = MOB_DEAD
-                        mob3_dmg = 0
-                        VEL_MOB3 = 0
-
-        elif look == "right":
-            if mob3_x - 70 < right.x < mob3_x: 
-                if right.y - 30< mob3_y < right.y + 30:
-                    mob3_hp = mob3_hp - right_dmg
-                    if mob3_hp < 0:
-                        mob_death_sound.play()
-                        CURRENTMOB3 = MOB_DEAD
-                        mob3_dmg = 0
-                        VEL_MOB3 = 0
-
-        elif look == "left":
-            if mob3_x + 70 > right.x > mob3_x:
-                if right.y - 30< mob3_y < right.y + 30:
-                    mob3_hp = mob3_hp - right_dmg
-                    if mob3_hp < 0:
-                        mob_death_sound.play()
-                        CURRENTMOB3 = MOB_DEAD
-                        mob3_dmg = 0
-                        VEL_MOB3 = 0
-
-        elif look == "up":
-            if mob3_x + 30 > right.x > mob3_x - 30:
-                if mob3_y + 70 > right.y > mob3_y:
-                    mob3_hp = mob3_hp - right_dmg
-                    if mob3_hp < 0:
-                        mob_death_sound.play()
-                        CURRENTMOB3 = MOB_DEAD
-                        mob3_dmg = 0
-                        VEL_MOB3 = 0
     
 
-    if keys_pressed[pygame.K_SPACE]:
-        if look == "down":
-            if boss_x + 70 > right.x > boss_x - 20:
-                if boss_y + 0 > right.y > boss_y - 50:
-                    boss_hp = boss_hp - right_dmg
-                    if boss_hp < 0:
-                        #CURRENTBOSS = MOB_DEAD
-                        boss_dmg = 0
-                        VEL_BOSS = 0
+    keys_pressed = pygame.key.get_pressed()
+    handle_bullets(bullets, right, mob1)
 
-        elif look == "right":
-            if boss_x - 30< right.x < boss_x: 
-                if boss_y - 30< right.y < boss_y + 100:
-                    boss_hp = boss_hp - right_dmg
-                    if boss_hp < 0:
-                        #CURRENTBOSS = MOB_DEAD
-                        boss_dmg = 0
-                        VEL_BOSS = 0
-
-        elif look == "left":
-            if boss_x + 100 > right.x > boss_x + 60:
-                if boss_y - 30 < right.y < boss_y + 100:
-                    boss_hp = boss_hp - right_dmg
-                    if boss_hp < 0:
-                        #CURRENTBOSS = MOB_DEAD
-                        boss_dmg = 0
-                        VEL_BOSS = 0
-
-        if look == "up":
-            if boss_x + 70 > right.x > boss_x - 20:
-                if boss_y + 90 > right.y > boss_y + 50:
-                    boss_hp = boss_hp - right_dmg
-                    if boss_hp < 0:
-                        #CURRENTBOSS = MOB_DEAD
-                        boss_dmg = 0
-                        VEL_BOSS = 0
-
-    rajzok(right)
+    rajzok(right, bullets)
 pygame.quit()
