@@ -137,3 +137,56 @@ mob1 = pygame.Rect(mob1_x, mob1_y, MOB_WIDTH, MOB_HEIGHT)
 mob2 = pygame.Rect(mob2_x, mob2_y, MOB_WIDTH, MOB_HEIGHT)
 mob3 = pygame.Rect(mob3_x, mob3_y, MOB_WIDTH, MOB_HEIGHT)
 boss = pygame.Rect(boss_x, boss_y, CHARACTER_HEIGHT * 2, CHARACTER_HEIGHT * 2)
+
+
+def handle_bullets(bullets, right, mob1, mob1_hp, mob2, mob2_hp, mob3, mob3_hp):
+    for bullet in bullets:
+        if look == "right":
+            bullet.x += VEL_BULLETS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #if look == "right":
+        #    
+        #    bullets.remove(bullet)
+        #elif look == "left":
+        #    bullet.x -= VEL_BULLETS
+        #    bullets.remove(bullet)
+        #elif look == "up":
+        #    bullet.y -= VEL_BULLETS
+        #    bullets.remove(bullet)
+        #elif look == "down":
+        #    bullet.y += VEL_BULLETS
+        #    bullets.remove(bullet)
+        #if lvl == 1:
+        #    if mob1.colliderect(bullet):
+        #        mob1_hp -= 10
+        #        bullets.remove(bullet)
+        #elif lvl == 2:
+        #    if mob1.colliderect(bullet):
+        #        mob1_hp -= 10
+        #        bullets.remove(bullet)
+        #    elif mob2.colliderect(bullet):
+        #        mob2_hp -= 10
+        #        bullets.remove(bullet)
+        #elif lvl == 3:
+        #    if mob1.colliderect(bullet):
+        #        mob1_hp -= 10
+        #        bullets.remove(bullet)
+        #    elif mob2.colliderect(bullet):
+        #        mob2_hp -= 10
+        #        bullets.remove(bullet)
+        #    elif mob3.colliderect(bullet):
+        #        mob2_hp -= 10
+        #        bullets.remove(bullet)
