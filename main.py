@@ -95,8 +95,8 @@ dmg_up_txt = False
 hp_up_txt = False
 speed_up_txt = False
 
-x = int(input("Cheatcode:"))
-lvl = x
+#x = int(input("lvl:"))
+#lvl = x
 #Import/scale images
 UPMOVE1_IMAGE = pygame.image.load(os.path.join("images", "forwardmove1.png"))
 UPMOVE1 = pygame.transform.scale(UPMOVE1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
