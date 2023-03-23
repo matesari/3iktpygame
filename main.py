@@ -28,7 +28,7 @@ mob1_hit = pygame.USEREVENT + 1
 mob2_hit = pygame.USEREVENT + 2
 mob3_hit = pygame.USEREVENT + 3
 
-right_dmg = 1
+right_dmg = 10
 mob1_dmg = 0
 mob2_dmg = 0
 mob3_dmg = 0
@@ -761,7 +761,7 @@ while run:
                         pass
                 elif random_drop == 3:
                     if opened != True:
-                        right_dmg += 0.2
+                        right_dmg += 5
                         print(right_dmg)
                         dmg_up_txt = True
                         opened = True
@@ -789,7 +789,7 @@ while run:
                         pass
                 elif random_drop == 3:
                     if opened != True:
-                        right_dmg += 0.2
+                        right_dmg += 5
                         print(right_dmg)
                         opened = True
                     else:
@@ -816,7 +816,7 @@ while run:
                         pass
                 elif random_drop == 3:
                     if opened != True:
-                        right_dmg += 0.4
+                        right_dmg += 5
                         print(right_dmg)
                         opened = True
                     else:
@@ -1012,84 +1012,84 @@ while run:
     if 5 > lvl > 0 or 10 > lvl > 5 or 15 > lvl > 10 or 20 > lvl > 15:
         for bullet_right in bullets_right:
             if bullet_right.x - 50 < mob1_x < bullet_right.x + 50 and bullet_right.y - 90< mob1_y < bullet_right.y + 50 or bullet_right.x == mob1_x and bullet_right.y == mob1_y:
-                mob1_hp -= 10
+                mob1_hp -= right_dmg
                 bullets_right.remove(bullet_right)
 
         for bullet_left in bullets_left:
             if bullet_left.x - 50 < mob1_x < bullet_left.x + 50 and bullet_left.y - 90< mob1_y < bullet_left.y + 50 or bullet_left.x == mob1_x and bullet_left.y == mob1_y:
-                mob1_hp -= 10
+                mob1_hp -= right_dmg
                 bullets_left.remove(bullet_left)
 
         for bullet_down in bullets_down:
             if bullet_down.x - 50 < mob1_x < bullet_down.x + 50 and bullet_down.y - 90< mob1_y < bullet_down.y + 50 or bullet_down.x == mob1_x and bullet_down.y == mob1_y:
-                mob1_hp -= 10
+                mob1_hp -= right_dmg
                 bullets_down.remove(bullet_down)
 
         for bullet_up in bullets_up:
             if bullet_up.x - 50 < mob1_x < bullet_up.x + 50 and bullet_up.y - 90< mob1_y < bullet_up.y + 50 or bullet_up.x == mob1_x and bullet_up.y == mob1_y:
-                mob1_hp -= 10
+                mob1_hp -= right_dmg
                 bullets_up.remove(bullet_up)
     if 5 > lvl > 1 or 10 > lvl > 5 or 15 > lvl > 10 or 20 > lvl > 15:
         for bullet_right in bullets_right:
             if bullet_right.x - 50 < mob2_x < bullet_right.x + 50 and bullet_right.y - 90< mob2_y < bullet_right.y + 50 or bullet_right.x == mob2_x and bullet_right.y == mob2_y:
-                mob2_hp -= 10
+                mob2_hp -= right_dmg
                 bullets_right.remove(bullet_right)
 
         for bullet_left in bullets_left:
             if bullet_left.x - 50 < mob2_x < bullet_left.x + 50 and bullet_left.y - 90< mob2_y < bullet_left.y + 50 or bullet_left.x == mob2_x and bullet_left.y == mob2_y:
-                mob2_hp -= 10
+                mob2_hp -= right_dmg
                 bullets_left.remove(bullet_left)
 
         for bullet_down in bullets_down:
             if bullet_down.x - 50 < mob2_x < bullet_down.x + 50 and bullet_down.y - 90< mob2_y < bullet_down.y + 50 or bullet_down.x == mob2_x and bullet_down.y == mob2_y:
-                mob2_hp -= 10
+                mob2_hp -= right_dmg
                 bullets_down.remove(bullet_down)
 
         for bullet_up in bullets_up:
             if bullet_up.x - 50 < mob2_x < bullet_up.x + 50 and bullet_up.y - 90< mob2_y < bullet_up.y + 50 or bullet_up.x == mob2_x and bullet_up.y == mob2_y:
-                mob2_hp -= 10
+                mob2_hp -= right_dmg
                 bullets_up.remove(bullet_up)
     
     if 5 > lvl > 2 or 10 > lvl > 5 or 15 > lvl > 10 or 20 > lvl > 15:
         for bullet_right in bullets_right:
             if bullet_right.x - 50 < mob3_x < bullet_right.x + 50 and bullet_right.y - 90< mob3_y < bullet_right.y + 50 or bullet_right.x == mob3_x and bullet_right.y == mob3_y:
-                mob3_hp -= 10
+                mob3_hp -= right_dmg
                 bullets_right.remove(bullet_right)
 
         for bullet_left in bullets_left:
             if bullet_left.x - 50 < mob3_x < bullet_left.x + 50 and bullet_left.y - 90< mob3_y < bullet_left.y + 50 or bullet_left.x == mob3_x and bullet_left.y == mob3_y:
-                mob3_hp -= 10
+                mob3_hp -= right_dmg
                 bullets_left.remove(bullet_left)
 
         for bullet_down in bullets_down:
             if bullet_down.x - 50 < mob3_x < bullet_down.x + 50 and bullet_down.y - 90< mob3_y < bullet_down.y + 50 or bullet_down.x == mob3_x and bullet_down.y == mob3_y:
-                mob3_hp -= 10
+                mob3_hp -= right_dmg
                 bullets_down.remove(bullet_down)
 
         for bullet_up in bullets_up:
             if bullet_up.x - 50 < mob3_x < bullet_up.x + 50 and bullet_up.y - 90< mob3_y < bullet_up.y + 50 or bullet_up.x == mob3_x and bullet_up.y == mob3_y:
-                mob3_hp -= 10
+                mob3_hp -= right_dmg
                 bullets_up.remove(bullet_up)
     #print(boss_x, boss_x + 100)
     if lvl == 5 or lvl == 10 or lvl == 15 or lvl == 20:
         for bullet_right in bullets_right:
             if boss_x < bullet_right.x < boss_x + 150 and boss_y < bullet_right.y < boss_y + 180 or bullet_right.x == boss_x and bullet_right.y == boss_y:
-                boss_hp -= 10
+                boss_hp -= right_dmg
                 bullets_right.remove(bullet_right)
 
         for bullet_left in bullets_left:
             if boss_x < bullet_left.x < boss_x + 150 and boss_y < bullet_left.y < boss_y + 180 or bullet_left.x == boss_x and bullet_left.y == boss_y:
-                boss_hp -= 10
+                boss_hp -= right_dmg
                 bullets_left.remove(bullet_left)
 
         for bullet_down in bullets_down:
             if boss_x < bullet_down.x < boss_x + 150 and boss_y < bullet_down.y < boss_y + 150 or bullet_down.x == boss_x and bullet_down.y == boss_y:
-                boss_hp -= 10
+                boss_hp -= right_dmg
                 bullets_down.remove(bullet_down)
 
         for bullet_up in bullets_up:
             if boss_x < bullet_up.x < boss_x + 150 and boss_y < bullet_up.y < boss_y + 150 or bullet_up.x == boss_x and bullet_up.y == boss_y:
-                boss_hp -= 10
+                boss_hp -= right_dmg
                 bullets_up.remove(bullet_up)
 
 
