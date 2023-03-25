@@ -17,7 +17,7 @@ RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 TRANSPARENT = (0, 0, 0, 0)
 HP = 100
-lvl = 0
+lvl = -1
 mob1_hp = 100
 mob2_hp = 100
 mob3_hp = 100
@@ -98,18 +98,20 @@ speed_up_txt = False
 #x = int(input("lvl:"))
 #lvl = x
 #Import/scale images
-UPMOVE1_IMAGE = pygame.image.load(os.path.join("images", "forwardmove1.png"))
-UPMOVE1 = pygame.transform.scale(UPMOVE1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
-LEFTMOVE1_IMAGE = pygame.image.load(os.path.join("images", "leftmove1.png"))
-LEFTMOVE1 = pygame.transform.scale(LEFTMOVE1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
-DOWNMOVE1_IMAGE = pygame.image.load(os.path.join("images", "backmove1.png"))
-DOWNMOVE1 = pygame.transform.scale(DOWNMOVE1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
-RIGHTMOVE1_IMAGE = pygame.image.load(os.path.join("images", "rightmove1.png"))
-RIGHTMOVE1 = pygame.transform.scale(RIGHTMOVE1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
+#UPMOVE1_IMAGE = pygame.image.load(os.path.join("images", "forwardmove1.png"))
+#UPMOVE1 = pygame.transform.scale(UPMOVE1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
+#LEFTMOVE1_IMAGE = pygame.image.load(os.path.join("images", "leftmove1.png"))
+#LEFTMOVE1 = pygame.transform.scale(LEFTMOVE1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
+#DOWNMOVE1_IMAGE = pygame.image.load(os.path.join("images", "backmove1.png"))
+#DOWNMOVE1 = pygame.transform.scale(DOWNMOVE1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
+#RIGHTMOVE1_IMAGE = pygame.image.load(os.path.join("images", "rightmove1.png"))
+#RIGHTMOVE1 = pygame.transform.scale(RIGHTMOVE1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
 C_X_IMAGE = pygame.image.load(os.path.join("images", "c_x.png"))
 C_X = pygame.transform.scale(C_X_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
 frm_IMAGE = pygame.image.load(os.path.join("images", "frm.png"))
+frm2_IMAGE = pygame.image.load(os.path.join("images", "frm2.png"))
 FRM = pygame.transform.scale(frm_IMAGE, (WIDTH, HEIGHT))
+FRM2 = pygame.transform.scale(frm2_IMAGE, (WIDTH, HEIGHT))
 
 BODY_LEFT_IMAGE = pygame.image.load(os.path.join("images","character", "body_left.png"))
 BODY_LEFT = pygame.transform.scale(BODY_LEFT_IMAGE, (BODY_WIDTH, BODY_HEIGHT))
@@ -172,6 +174,39 @@ CHEST_OPENED = pygame.transform.scale(CHEST_OPENED_IMAGE, (CHARACTER_WIDTH, CHAR
 CROWN_IMAGE = pygame.image.load(os.path.join("images", "crown.png"))
 CROWN = pygame.transform.scale(CROWN_IMAGE, (85, 65))
 
+CITY_IMAGE = pygame.image.load(os.path.join("images", "cityimg.jpg"))
+CITY = pygame.transform.scale(CITY_IMAGE, (WIDTH, HEIGHT))
+
+VARAZSLO_IMAGE = pygame.image.load(os.path.join("images", "varazslo1.png"))
+VARAZSLO = pygame.transform.scale(VARAZSLO_IMAGE, (CHARACTER_WIDTH * 2, CHARACTER_HEIGHT * 2))
+
+PIROS_MOB1_IMAGE = pygame.image.load(os.path.join("images", "mob", "piros1.png"))
+PIROS_MOB1 = pygame.transform.scale(PIROS_MOB1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
+
+PIROS_MOB2_IMAGE = pygame.image.load(os.path.join("images", "mob", "piros2.png"))
+PIROS_MOB2 = pygame.transform.scale(PIROS_MOB2_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
+
+PIROS_MOB3_IMAGE = pygame.image.load(os.path.join("images", "mob", "piros3.png"))
+PIROS_MOB3 = pygame.transform.scale(PIROS_MOB3_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
+
+PIROS_MOB4_IMAGE = pygame.image.load(os.path.join("images", "mob", "piros0.png"))
+PIROS_MOB4 = pygame.transform.scale(PIROS_MOB4_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
+
+PIROS_BOSS_IMAGE = pygame.image.load(os.path.join("images", "redmob.png"))
+PIROS_BOSS = pygame.transform.scale(PIROS_BOSS_IMAGE, (CHARACTER_WIDTH * 2, CHARACTER_HEIGHT * 2))
+
+ZOLD_MOB1_IMAGE = pygame.image.load(os.path.join("images", "mob", "zöldek0.png"))
+ZOLD_MOB1 = pygame.transform.scale(ZOLD_MOB1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
+
+ZOLD_MOB2_IMAGE = pygame.image.load(os.path.join("images", "mob", "zöldek1.png"))
+ZOLD_MOB2 = pygame.transform.scale(ZOLD_MOB2_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
+
+ZOLD_MOB3_IMAGE = pygame.image.load(os.path.join("images", "mob", "zöldek2.png"))
+ZOLD_MOB3 = pygame.transform.scale(ZOLD_MOB3_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
+
+ZOLD_MOB4_IMAGE = pygame.image.load(os.path.join("images", "mob", "zöldek3.png"))
+ZOLD_MOB4 = pygame.transform.scale(ZOLD_MOB4_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
+
 opened = False
 
 CURRENTBOSS = BOSS
@@ -197,12 +232,19 @@ chest_y = 200
 
 boss_x = 400
 boss_y = 200
-boss_dmg = 0
-VEL_BOSS = 0
+boss_dmg = 10
+VEL_BOSS = 3
+
+door = True
 
 
 def rajzok(right, bullets_right,bullets_down,bullets_left,bullets_up, bullet_right, bullet_left, bullet_up, bullet_down):
-    WIN.blit(BACKGROUND, (0, 0))
+    if lvl == -1:
+        WIN.blit(CITY, (0, 0))
+        if right.x > 650:
+            WIN.blit(VARAZSLO, (750 ,330))
+    if lvl > -1:
+        WIN.blit(BACKGROUND, (0, 0))
 
     if lvl == 1:
         if mob1_hp <= 0:
@@ -258,41 +300,38 @@ def rajzok(right, bullets_right,bullets_down,bullets_left,bullets_up, bullet_rig
         pygame.draw.rect(WIN, RED, (boss_x, boss_y - 30, boss_hp, hp_bar_height))
         if boss_hp <= 0:
             WIN.blit(CROWN, (right.x + 25, right.y - 10))
-    #elif lvl > 5:
-    #    WIN.blit(CROWN, (right.x + 25, right.y - 10))
-    #    WIN.blit(CURRENTMOB1, (mob1_x, mob1_y))
-    #    pygame.draw.rect(WIN, WHITE, (mob1_x , mob1_y - 30, hp_bar_width, hp_bar_height))
-    #    pygame.draw.rect(WIN, RED, (mob1_x, mob1_y - 30, mob1_hp, hp_bar_height))
-    #    WIN.blit(CURRENTMOB2, (mob2_x, mob2_y))
-    #    pygame.draw.rect(WIN, WHITE, (mob2_x , mob2_y - 30, hp_bar_width, hp_bar_height))
-    #    pygame.draw.rect(WIN, RED, (mob2_x, mob2_y - 30, mob2_hp, hp_bar_height))
-    #    WIN.blit(CURRENTMOB3, (mob3_x, mob3_y))
-    #    pygame.draw.rect(WIN, WHITE, (mob3_x , mob3_y - 30, hp_bar_width, hp_bar_height))
-    #    pygame.draw.rect(WIN, RED, (mob3_x, mob3_y - 30, mob3_hp, hp_bar_height))
-    pygame.draw.rect(WIN, WHITE, (right.x , right.y - 30, 100, hp_bar_height))
-    pygame.draw.rect(WIN, RED, (right.x, right.y - 30, HP, hp_bar_height))
+    elif lvl > 5:
+        WIN.blit(CROWN, (right.x - 25, right.y - 10))
+    
 
 
     right_hp_txt = HP_font.render("Hp: " + str(HP), 1, WHITE)
     WIN.blit(CURRENTBODY, (right.x, right.y))
     WIN.blit(CURRENTHEAD, (right.x, right.y - 20))
-    WIN.blit(FRM, (0, 0))
-    lvlup_txt = HP_font.render("Level: " + str(round(lvl)), 1, WHITE)
-    dmg_txt = HP_font.render("Damage: " + str(round(right_dmg, 2)), 1, WHITE)
-    speed_txt = HP_font.render("Speed: " + str(round(VEL_RIGHT, 2)), 1, WHITE)
-    WIN.blit(dmg_txt, (40, 10))
-    WIN.blit(speed_txt, (250, 10))
-    WIN.blit(lvlup_txt, (750, 10))
+    if lvl > -1:
+        if door == True:
+            WIN.blit(FRM2, (0, 0))
+        else:
+            WIN.blit(FRM, (0, 0))
+    if lvl > 0:
+        lvlup_txt = HP_font.render("Level: " + str(round(lvl)), 1, WHITE)
+        dmg_txt = HP_font.render("Damage: " + str(round(right_dmg, 2)), 1, WHITE)
+        speed_txt = HP_font.render("Speed: " + str(round(VEL_RIGHT, 2)), 1, WHITE)
+        WIN.blit(dmg_txt, (40, 10))
+        WIN.blit(speed_txt, (250, 10))
+        WIN.blit(lvlup_txt, (750, 10))
+        pygame.draw.rect(WIN, WHITE, (right.x , right.y - 30, 100, hp_bar_height))
+        pygame.draw.rect(WIN, RED, (right.x, right.y - 30, HP, hp_bar_height))
 
-
-    for bullet_right in bullets_right:
-        pygame.draw.rect(WIN, RED, bullet_right)
-    for bullet_down in bullets_down:
-        pygame.draw.rect(WIN, RED, bullet_down)
-    for bullet_up in bullets_up:
-        pygame.draw.rect(WIN, RED, bullet_up)
-    for bullet_left in bullets_left:
-        pygame.draw.rect(WIN, RED, bullet_left)
+    if lvl > -1:
+        for bullet_right in bullets_right:
+            pygame.draw.rect(WIN, RED, bullet_right)
+        for bullet_down in bullets_down:
+            pygame.draw.rect(WIN, RED, bullet_down)
+        for bullet_up in bullets_up:
+            pygame.draw.rect(WIN, RED, bullet_up)
+        for bullet_left in bullets_left:
+            pygame.draw.rect(WIN, RED, bullet_left)
     
     if gameover == True:
         game_over_txt = HP_font.render("meghaltál", 1, WHITE)
@@ -321,7 +360,7 @@ shoot_sound.set_volume(1)
 #main gam
 chest = pygame.Rect(400, 200, CHARACTER_WIDTH // 2, CHARACTER_HEIGHT// 2)
 chest_opened = pygame.Rect(400, 200, CHARACTER_WIDTH, CHARACTER_HEIGHT)
-right = pygame.Rect(700, 100, CHARACTER_WIDTH, CHARACTER_HEIGHT)
+right = pygame.Rect(30, 400, CHARACTER_WIDTH, CHARACTER_HEIGHT)
 mob1 = pygame.Rect(mob1_x, mob1_y, CHARACTER_WIDTH, CHARACTER_HEIGHT)
 mob2 = pygame.Rect(mob2_x, mob2_y, MOB_WIDTH, MOB_HEIGHT)
 mob3 = pygame.Rect(mob3_x, mob3_y, MOB_WIDTH, MOB_HEIGHT)
@@ -401,6 +440,13 @@ while run:
 
     
     #right w
+    if lvl == -1:
+        if right.x == 670:
+            time.sleep(1.5)
+            lvl += 1
+            right.x = 400
+            right.y = 300
+
     if lvl < 4:
         if lvl == 0:
             if right.x > 780:
@@ -418,9 +464,9 @@ while run:
                     mob1_hp = 100
                     mob2_hp = 100
                     mob3_hp = 100
-                    CURRENTMOB1 = MOB
-                    CURRENTMOB2 = MOB
-                    CURRENTMOB3 = MOB
+                    CURRENTMOB1 = PIROS_MOB4
+                    CURRENTMOB2 = PIROS_MOB4
+                    CURRENTMOB3 = PIROS_MOB4
                     HP = HP + 25
                     VEL_MOB1 = 2
                     VEL_MOB2 = 2
@@ -438,9 +484,11 @@ while run:
                     shot_delay = 0
                     next_shot = 0
                     mob1_dmg = 0.1
+                    door = False
 
         if lvl == 1:
             if mob1_hp <= 0:
+                door = True
                 if right.x > 780:
                     if 245 > right.y > 170:
                         right.x = 20
@@ -456,9 +504,9 @@ while run:
                         mob1_hp = 100
                         mob2_hp = 100
                         mob3_hp = 100
-                        CURRENTMOB1 = MOB
-                        CURRENTMOB2 = MOB
-                        CURRENTMOB3 = MOB
+                        CURRENTMOB1 = PIROS_MOB1
+                        CURRENTMOB2 = PIROS_MOB1
+                        CURRENTMOB3 = PIROS_MOB1
                         HP = HP + 25
                         VEL_MOB1 = 2
                         VEL_MOB2 = 2
@@ -476,8 +524,10 @@ while run:
                         shot_delay = 0
                         next_shot = 0
                         print(random_drop)
+                        door = False
         elif lvl == 2:
             if mob1_hp <= 0 and mob2_hp <= 0:
+                door = True
                 if right.x > 780:
                     if 245 > right.y > 170:
                         right.x = 20
@@ -493,9 +543,9 @@ while run:
                         mob1_hp = 100
                         mob2_hp = 100
                         mob3_hp = 100
-                        CURRENTMOB1 = MOB
-                        CURRENTMOB2 = MOB
-                        CURRENTMOB3 = MOB
+                        CURRENTMOB1 = PIROS_MOB2
+                        CURRENTMOB2 = PIROS_MOB2
+                        CURRENTMOB3 = PIROS_MOB2
                         HP = HP + 25
                         VEL_MOB1 = 2
                         VEL_MOB2 = 2
@@ -513,8 +563,10 @@ while run:
                         shot_delay = 0
                         next_shot = 0
                         print(random_drop)
+                        door = False
         elif lvl == 3:
             if mob1_hp <= 0 and mob2_hp <= 0 and mob3_hp <= 0:
+                door = True
                 if right.x > 780:
                     if 245 > right.y > 170:
                         right.x = 20
@@ -530,9 +582,9 @@ while run:
                         mob1_hp = 100
                         mob2_hp = 100
                         mob3_hp = 100
-                        CURRENTMOB1 = MOB
-                        CURRENTMOB2 = MOB
-                        CURRENTMOB3 = MOB
+                        CURRENTMOB1 = PIROS_MOB3
+                        CURRENTMOB2 = PIROS_MOB3
+                        CURRENTMOB3 = PIROS_MOB3
                         HP = HP + 25
                         VEL_MOB1 = 2
                         VEL_MOB2 = 2
@@ -550,10 +602,16 @@ while run:
                         shot_delay = 0
                         next_shot = 0
                         print(random_drop)
+                        door = False
+
     elif lvl == 4 or lvl == 9 or lvl == 14 or lvl == 19:
         if mob1_hp <= 0 and mob2_hp <= 0 and mob3_hp <= 0:
+            door = True
             if right.x > 780:
                 if 245 > right.y > 170:
+                    if lvl == 4:
+                        CURRENTBOSS = PIROS_BOSS
+                        
                     right.x = 20
                     right.y = 200
                     lvl = lvl + 1
@@ -585,11 +643,29 @@ while run:
                     bullets_up = []
                     shot_delay = 0
                     next_shot = 0
+                    door = False
 
     elif 9 > lvl > 4:
         if mob1_hp <= 0 and mob2_hp <= 0 and mob3_hp <= 0:
+            door = True
             if right.x > 780:
                 if 245 > right.y > 170:
+                    if lvl == 5:
+                        CURRENTMOB1 = ZOLD_MOB1
+                        CURRENTMOB2 = ZOLD_MOB1
+                        CURRENTMOB3 = ZOLD_MOB1
+                    if lvl == 6:
+                        CURRENTMOB1 = ZOLD_MOB2
+                        CURRENTMOB2 = ZOLD_MOB2
+                        CURRENTMOB3 = ZOLD_MOB2
+                    if lvl == 7:
+                        CURRENTMOB1 = ZOLD_MOB3
+                        CURRENTMOB2 = ZOLD_MOB3
+                        CURRENTMOB3 = ZOLD_MOB3
+                    if lvl == 8:
+                        CURRENTMOB1 = ZOLD_MOB4
+                        CURRENTMOB2 = ZOLD_MOB4
+                        CURRENTMOB3 = ZOLD_MOB4
                     right.x = 20
                     right.y = 200
                     lvl = lvl + 1
@@ -603,9 +679,6 @@ while run:
                     mob1_hp = 150
                     mob2_hp = 150
                     mob3_hp = 150
-                    CURRENTMOB1 = MOB2
-                    CURRENTMOB2 = MOB2
-                    CURRENTMOB3 = MOB2
                     HP = HP + 25
                     VEL_MOB1 = 2.3
                     VEL_MOB2 = 2.3
@@ -623,9 +696,11 @@ while run:
                     shot_delay = 0
                     next_shot = 0
                     print(random_drop)
+                    door = False
     
     elif 14 > lvl > 9:
         if mob1_hp <= 0 and mob2_hp <= 0 and mob3_hp <= 0:
+            door = True
             if right.x > 780:
                 if 245 > right.y > 170:
                     right.x = 20
@@ -661,9 +736,11 @@ while run:
                     shot_delay = 0
                     next_shot = 0
                     print(random_drop)
+                    door = False
 
     elif 19 > lvl > 14:
         if mob1_hp <= 0 and mob2_hp <= 0 and mob3_hp <= 0:
+            door = True
             if right.x > 780:
                 if 245 > right.y > 170:
                     right.x = 20
@@ -699,6 +776,7 @@ while run:
                     shot_delay = 0
                     next_shot = 0
                     print(random_drop)
+                    door = False
         
     
     if right.x - 50 < mob1_x < right.x + 50 and right.y - 90 < mob1_y < right.y + 50 or right.x == mob1_x and right.y == mob1_y:
@@ -928,36 +1006,48 @@ while run:
 ########################################################################            
 
 ############################# MOVEMENT #############################
-    keys_pressed = pygame.key.get_pressed()
-    if keys_pressed[pygame.K_a] and right.x - VEL_RIGHT > 0:
-        right.x -= VEL_RIGHT
-        if HP < 0:
-            pass
-        else:
-            CURRENTBODY = BODY_LEFT
-    
-    if keys_pressed[pygame.K_d] and right.x + VEL_RIGHT < WIDTH-CHARACTER_WIDTH :
-        right.x += VEL_RIGHT
-        if HP < 0:
-            pass
-        else:
-            CURRENTBODY = BODY_RIGHT
+    if lvl == -1:
+        if right.x < 670:
+            keys_pressed = pygame.key.get_pressed()
+            if keys_pressed[pygame.K_a] and right.x - VEL_RIGHT > 0:
+                right.x -= VEL_RIGHT
+            if keys_pressed[pygame.K_d] and right.x + VEL_RIGHT < WIDTH-CHARACTER_WIDTH :
+                right.x += VEL_RIGHT
         
-     
-    if keys_pressed[pygame.K_w] and right.y - VEL_RIGHT > 0-30:
-        right.y -= VEL_RIGHT
-        if HP < 0:
-            pass
-        else:
-            CURRENTBODY = BODY_UP
+
         
-        
-    if keys_pressed[pygame.K_s] and right.y - VEL_RIGHT < HEIGHT-CHARACTER_HEIGHT:
-        right.y += VEL_RIGHT
-        if HP < 0:
-            pass
-        else:
-            CURRENTBODY = BODY_UP
+
+    if lvl > -1:
+        keys_pressed = pygame.key.get_pressed()
+        if keys_pressed[pygame.K_a] and right.x - VEL_RIGHT > 0:
+            right.x -= VEL_RIGHT
+            if HP < 0:
+                pass
+            else:
+                CURRENTBODY = BODY_LEFT
+
+        if keys_pressed[pygame.K_d] and right.x + VEL_RIGHT < WIDTH-CHARACTER_WIDTH :
+            right.x += VEL_RIGHT
+            if HP < 0:
+                pass
+            else:
+                CURRENTBODY = BODY_RIGHT
+
+
+        if keys_pressed[pygame.K_w] and right.y - VEL_RIGHT > 0-30:
+            right.y -= VEL_RIGHT
+            if HP < 0:
+                pass
+            else:
+                CURRENTBODY = BODY_UP
+
+
+        if keys_pressed[pygame.K_s] and right.y - VEL_RIGHT < HEIGHT-CHARACTER_HEIGHT:
+            right.y += VEL_RIGHT
+            if HP < 0:
+                pass
+            else:
+                CURRENTBODY = BODY_UP
         
     keys_pressed = pygame.key.get_pressed()
     if keys_pressed[pygame.K_LEFT]:
