@@ -51,7 +51,7 @@ CHARACTER_WIDTH, CHARACTER_HEIGHT = 110, 90
 HEAD_WIDTH, HEAD_HEIGHT = 110, 90
 BODY_WIDTH, BODY_HEIGHT = 110, 90
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Borsodi szitu)")
+pygame.display.set_caption("Borsodi Szitu")
 BORDER = pygame.Rect(WIDTH//2 - 5, 0, 10, HEIGHT)
 FPS = 60
 VEL_RIGHT = 4
@@ -61,8 +61,6 @@ VEL_MOB3 = 2
 
 clock = pygame.time.Clock()
 COUNTER = 2
-SHIELD_ON = "off"
-SPEED_ON = "off"
 look = "down"
 mob1_x = random.randrange(50, 850)
 mob1_y = random.randrange(50, 450)
@@ -82,32 +80,15 @@ bullets_right = []
 bullets_down = []
 bullets_up = []
 
-
-
 VEL_BULLETS = 6
 max_bullets = 3
-
-
-
 
 HP_font = pygame.font.SysFont("comicsant", 40)
 dmg_up_txt = False
 hp_up_txt = False
 speed_up_txt = False
 
-#x = int(input("lvl:"))
-#lvl = x
-#Import/scale images
-#UPMOVE1_IMAGE = pygame.image.load(os.path.join("images", "forwardmove1.png"))
-#UPMOVE1 = pygame.transform.scale(UPMOVE1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
-#LEFTMOVE1_IMAGE = pygame.image.load(os.path.join("images", "leftmove1.png"))
-#LEFTMOVE1 = pygame.transform.scale(LEFTMOVE1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
-#DOWNMOVE1_IMAGE = pygame.image.load(os.path.join("images", "backmove1.png"))
-#DOWNMOVE1 = pygame.transform.scale(DOWNMOVE1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
-#RIGHTMOVE1_IMAGE = pygame.image.load(os.path.join("images", "rightmove1.png"))
-#RIGHTMOVE1 = pygame.transform.scale(RIGHTMOVE1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
-C_X_IMAGE = pygame.image.load(os.path.join("images", "c_x.png"))
-C_X = pygame.transform.scale(C_X_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
+# Import/scale images
 frm_IMAGE = pygame.image.load(os.path.join("images", "frm.png"))
 frm2_IMAGE = pygame.image.load(os.path.join("images", "frm2.png"))
 FRM = pygame.transform.scale(frm_IMAGE, (WIDTH, HEIGHT))
@@ -131,19 +112,6 @@ HEAD_LEFT_IMAGE = pygame.image.load(os.path.join("images","character", "head_lef
 HEAD_LEFT = pygame.transform.scale(HEAD_LEFT_IMAGE, (HEAD_WIDTH, HEAD_HEIGHT))
 CURRENTHEAD = HEAD_DOWN
 
-
-CURRENTRIGHT = DOWNMOVE1
-
-SPEED_IMAGE = pygame.image.load(os.path.join("images", "speedboost.png"))
-SPEED = pygame.transform.scale(SPEED_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
-
-HEAL_IMAGE = pygame.image.load(os.path.join("images", "heal.png"))
-HEAL = pygame.transform.scale(HEAL_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
-
-FREEZE_IMAGE = pygame.image.load(os.path.join("images", "freeze.png"))
-FREEZE = pygame.transform.scale(FREEZE_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
-
-
 MOB_IMAGE = pygame.image.load(os.path.join("images", "character", "lvl1mob.png"))
 MOB = pygame.transform.scale(MOB_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
 
@@ -156,12 +124,6 @@ MOB3 = pygame.transform.scale(MOB3_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
 MOB4_IMAGE = pygame.image.load(os.path.join("images", "character", "lvl4mob.png"))
 MOB4 = pygame.transform.scale(MOB4_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
 
-BOSS_IMAGE = pygame.image.load(os.path.join("images", "mob.png"))
-BOSS = pygame.transform.scale(MOB_IMAGE, (CHARACTER_WIDTH * 2, CHARACTER_HEIGHT * 2))
-
-MOB_DEAD_IMAGE = pygame.image.load(os.path.join("images", "mob_dead.png"))
-MOB_DEAD = pygame.transform.scale(MOB_DEAD_IMAGE, (CHARACTER_WIDTH * 1.2, CHARACTER_HEIGHT * 1.2))
-
 BACKGROUND_IMAGE = pygame.image.load(os.path.join("images", "background.jpg"))
 BACKGROUND = pygame.transform.scale(BACKGROUND_IMAGE, (WIDTH, HEIGHT))
 
@@ -171,11 +133,11 @@ CHEST = pygame.transform.scale(CHEST_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
 CHEST_OPENED_IMAGE = pygame.image.load(os.path.join("images", "chest_opened.png"))
 CHEST_OPENED = pygame.transform.scale(CHEST_OPENED_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
 
-CROWN_IMAGE = pygame.image.load(os.path.join("images", "crown.png"))
-CROWN = pygame.transform.scale(CROWN_IMAGE, (85, 65))
-
-CITY_IMAGE = pygame.image.load(os.path.join("images", "cityimg.jpg"))
+CITY_IMAGE = pygame.image.load(os.path.join("images", "cityimg.png"))
 CITY = pygame.transform.scale(CITY_IMAGE, (WIDTH, HEIGHT))
+
+TUTORIAL_IMAGE = pygame.image.load(os.path.join("images", "tutorial.png"))
+TUTORIAL = pygame.transform.scale(TUTORIAL_IMAGE, (WIDTH, HEIGHT))
 
 VARAZSLO_IMAGE = pygame.image.load(os.path.join("images", "varazslo1.png"))
 VARAZSLO = pygame.transform.scale(VARAZSLO_IMAGE, (CHARACTER_WIDTH * 2, CHARACTER_HEIGHT * 2))
@@ -195,6 +157,9 @@ PIROS_MOB4 = pygame.transform.scale(PIROS_MOB4_IMAGE, (CHARACTER_WIDTH, CHARACTE
 PIROS_BOSS_IMAGE = pygame.image.load(os.path.join("images", "redmob.png"))
 PIROS_BOSS = pygame.transform.scale(PIROS_BOSS_IMAGE, (CHARACTER_WIDTH * 2, CHARACTER_HEIGHT * 2))
 
+ZOLD_BOSS_IMAGE = pygame.image.load(os.path.join("images", "zoldboss.png"))
+ZOLD_BOSS = pygame.transform.scale(ZOLD_BOSS_IMAGE, (CHARACTER_WIDTH * 2, CHARACTER_HEIGHT * 2))
+
 ZOLD_MOB1_IMAGE = pygame.image.load(os.path.join("images", "mob", "zöldek0.png"))
 ZOLD_MOB1 = pygame.transform.scale(ZOLD_MOB1_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
 
@@ -207,9 +172,12 @@ ZOLD_MOB3 = pygame.transform.scale(ZOLD_MOB3_IMAGE, (CHARACTER_WIDTH, CHARACTER_
 ZOLD_MOB4_IMAGE = pygame.image.load(os.path.join("images", "mob", "zöldek3.png"))
 ZOLD_MOB4 = pygame.transform.scale(ZOLD_MOB4_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
 
+KOPORSO_IMAGE = pygame.image.load(os.path.join("images", "koporso.png"))
+KOPORSO = pygame.transform.scale(KOPORSO_IMAGE, (CHARACTER_WIDTH, CHARACTER_HEIGHT))
+
 opened = False
 
-CURRENTBOSS = BOSS
+CURRENTBOSS = PIROS_BOSS
 CURRENTMOB1 = MOB
 CURRENTMOB2 = MOB
 CURRENTMOB3 = MOB
@@ -230,21 +198,29 @@ ABILITY1 = pygame.Rect(DROP_X, DROP_Y, DROP_HEIGHT, DROP_WIDTH)
 chest_x = 400
 chest_y = 200
 
-boss_x = 400
-boss_y = 200
-boss_dmg = 10
-VEL_BOSS = 3
+boss_x = 4000
+boss_y = 2000
+boss_dmg = 0
+VEL_BOSS = 0
 
 door = True
 
 
 def rajzok(right, bullets_right,bullets_down,bullets_left,bullets_up, bullet_right, bullet_left, bullet_up, bullet_down):
-    if lvl == -1:
-        WIN.blit(CITY, (0, 0))
-        if right.x > 650:
-            WIN.blit(VARAZSLO, (750 ,330))
-    if lvl > -1:
+    if lvl == -1 or lvl == 12:
+        if lvl == -1:
+            WIN.blit(CITY, (0, 0))
+            if right.x > 650:
+                WIN.blit(VARAZSLO, (750 ,330))
+        
+        if lvl == 12:
+            WIN.blit(CITY, (0, 0))
+
+    if 12 > lvl > 0:
         WIN.blit(BACKGROUND, (0, 0))
+    
+    if lvl == 0:
+        WIN.blit(TUTORIAL, (0, 0))
 
     if lvl == 1:
         if mob1_hp <= 0:
@@ -259,7 +235,7 @@ def rajzok(right, bullets_right,bullets_down,bullets_left,bullets_up, bullet_rig
             elif opened == True:
                 WIN.blit(CHEST_OPENED, (400, 200))
             
-    if 5 > lvl > 2 or lvl > 5:
+    if 5 > lvl > 2 or 10 > lvl > 5:
         if mob1_hp <= 0 and mob2_hp <= 0 and mob3_hp <= 0:
             if opened == False:
                 WIN.blit(CHEST, (400, 200))
@@ -275,40 +251,43 @@ def rajzok(right, bullets_right,bullets_down,bullets_left,bullets_up, bullet_rig
 
     if lvl == 1:
         WIN.blit(CURRENTMOB1, (mob1_x, mob1_y))
-        pygame.draw.rect(WIN, WHITE, (mob1_x , mob1_y - 30, hp_bar_width, hp_bar_height))
-        pygame.draw.rect(WIN, RED, (mob1_x, mob1_y - 30, mob1_hp, hp_bar_height))
+        if mob1_hp > 0:
+            pygame.draw.rect(WIN, WHITE, (mob1_x , mob1_y - 30, hp_bar_width, hp_bar_height))
+            pygame.draw.rect(WIN, RED, (mob1_x, mob1_y - 30, mob1_hp, hp_bar_height))
     elif lvl == 2:
         WIN.blit(CURRENTMOB1, (mob1_x, mob1_y))
-        pygame.draw.rect(WIN, WHITE, (mob1_x , mob1_y - 30, hp_bar_width, hp_bar_height))
-        pygame.draw.rect(WIN, RED, (mob1_x, mob1_y - 30, mob1_hp, hp_bar_height))
+        if mob1_hp > 0:
+            pygame.draw.rect(WIN, WHITE, (mob1_x , mob1_y - 30, hp_bar_width, hp_bar_height))
+            pygame.draw.rect(WIN, RED, (mob1_x, mob1_y - 30, mob1_hp, hp_bar_height))
         WIN.blit(CURRENTMOB2, (mob2_x, mob2_y))
-        pygame.draw.rect(WIN, WHITE, (mob2_x , mob2_y - 30, hp_bar_width, hp_bar_height))
-        pygame.draw.rect(WIN, RED, (mob2_x, mob2_y - 30, mob2_hp, hp_bar_height))
-    elif 5 > lvl > 2 or 10 > lvl > 5 or 15 > lvl > 10 or 20 > lvl > 15:
+        if mob2_hp > 0:
+            pygame.draw.rect(WIN, WHITE, (mob2_x , mob2_y - 30, hp_bar_width, hp_bar_height))
+            pygame.draw.rect(WIN, RED, (mob2_x, mob2_y - 30, mob2_hp, hp_bar_height))
+    elif 5 > lvl > 2 or 10 > lvl > 5 :
         WIN.blit(CURRENTMOB1, (mob1_x, mob1_y))
-        pygame.draw.rect(WIN, WHITE, (mob1_x , mob1_y - 30, hp_bar_width, hp_bar_height))
-        pygame.draw.rect(WIN, RED, (mob1_x, mob1_y - 30, mob1_hp, hp_bar_height))
+        if mob1_hp > 0:
+            pygame.draw.rect(WIN, WHITE, (mob1_x , mob1_y - 30, hp_bar_width, hp_bar_height))
+            pygame.draw.rect(WIN, RED, (mob1_x, mob1_y - 30, mob1_hp, hp_bar_height))
         WIN.blit(CURRENTMOB2, (mob2_x, mob2_y))
-        pygame.draw.rect(WIN, WHITE, (mob2_x , mob2_y - 30, hp_bar_width, hp_bar_height))
-        pygame.draw.rect(WIN, RED, (mob2_x, mob2_y - 30, mob2_hp, hp_bar_height))
+        if mob2_hp > 0:
+            pygame.draw.rect(WIN, WHITE, (mob2_x , mob2_y - 30, hp_bar_width, hp_bar_height))
+            pygame.draw.rect(WIN, RED, (mob2_x, mob2_y - 30, mob2_hp, hp_bar_height))
         WIN.blit(CURRENTMOB3, (mob3_x, mob3_y))
-        pygame.draw.rect(WIN, WHITE, (mob3_x , mob3_y - 30, hp_bar_width, hp_bar_height))
-        pygame.draw.rect(WIN, RED, (mob3_x, mob3_y - 30, mob3_hp, hp_bar_height))
-    elif lvl == 5 or lvl == 10 or lvl == 15 or lvl == 20:
+        if mob3_hp > 0:
+            pygame.draw.rect(WIN, WHITE, (mob3_x , mob3_y - 30, hp_bar_width, hp_bar_height))
+            pygame.draw.rect(WIN, RED, (mob3_x, mob3_y - 30, mob3_hp, hp_bar_height))
+    elif lvl == 5 or lvl == 10 or lvl == 11:
         WIN.blit(CURRENTBOSS, (boss_x, boss_y))
-        pygame.draw.rect(WIN, WHITE, (boss_x , boss_y - 30, max_boss_health, hp_bar_height))
-        pygame.draw.rect(WIN, RED, (boss_x, boss_y - 30, boss_hp, hp_bar_height))
-        if boss_hp <= 0:
-            WIN.blit(CROWN, (right.x + 25, right.y - 10))
-    elif lvl > 5:
-        WIN.blit(CROWN, (right.x - 25, right.y - 10))
-    
+        if boss_hp > 0:
+            pygame.draw.rect(WIN, WHITE, (boss_x , boss_y - 30, max_boss_health, hp_bar_height))
+            pygame.draw.rect(WIN, RED, (boss_x, boss_y - 30, boss_hp, hp_bar_height))
+    elif lvl == 12:
+        youwin_txt = HP_font.render("YOU WIN", 23, WHITE)
+        WIN.blit(youwin_txt, (WIDTH /2 - 40, HEIGHT/2 - 50))
 
-
-    right_hp_txt = HP_font.render("Hp: " + str(HP), 1, WHITE)
     WIN.blit(CURRENTBODY, (right.x, right.y))
     WIN.blit(CURRENTHEAD, (right.x, right.y - 20))
-    if lvl > -1:
+    if 12 > lvl > -1:
         if door == True:
             WIN.blit(FRM2, (0, 0))
         else:
@@ -335,29 +314,18 @@ def rajzok(right, bullets_right,bullets_down,bullets_left,bullets_up, bullet_rig
     
     if gameover == True:
         game_over_txt = HP_font.render("meghaltál", 1, WHITE)
-        press_enter_txt = HP_font.render("nyomj spacet, hogy újraéledj", 1, WHITE)
         WIN.fill(BLACK)
         WIN.blit(game_over_txt, (350, 200))
-        WIN.blit(press_enter_txt, (250, 250))
 
     pygame.display.update()
 
-    
-if lvl < 5:
-    mixer.music.load(os.path.join("images", "chill.wav"))
-    mixer.music.set_volume(0.5)
-    mixer.music.play(-1)
-    
-
-mob_death_sound = mixer.Sound(os.path.join("images", "mobdeathsound.wav"))
-mob_death_sound.set_volume(1)
 chest_open_sound = mixer.Sound(os.path.join("images", "chestopen.wav"))
 chest_open_sound.set_volume(1)
 
 shoot_sound = mixer.Sound(os.path.join("images", "shoot.wav"))
 shoot_sound.set_volume(1)
 
-#main gam
+#main game
 chest = pygame.Rect(400, 200, CHARACTER_WIDTH // 2, CHARACTER_HEIGHT// 2)
 chest_opened = pygame.Rect(400, 200, CHARACTER_WIDTH, CHARACTER_HEIGHT)
 right = pygame.Rect(30, 400, CHARACTER_WIDTH, CHARACTER_HEIGHT)
@@ -437,12 +405,10 @@ while run:
                 else:
                     pass
 
-
-    
     #right w
     if lvl == -1:
         if right.x == 670:
-            time.sleep(1.5)
+            time.sleep(2.5)
             lvl += 1
             right.x = 400
             right.y = 300
@@ -467,10 +433,9 @@ while run:
                     CURRENTMOB1 = PIROS_MOB4
                     CURRENTMOB2 = PIROS_MOB4
                     CURRENTMOB3 = PIROS_MOB4
-                    HP = HP + 25
-                    VEL_MOB1 = 2
-                    VEL_MOB2 = 2
-                    VEL_MOB3 = 2
+                    VEL_MOB1 = 2.5
+                    VEL_MOB2 = 2.5
+                    VEL_MOB3 = 2.5
                     hp_up_txt = False
                     speed_up_txt = False
                     dmg_up_txt = False
@@ -483,7 +448,7 @@ while run:
                     bullets_up = []
                     shot_delay = 0
                     next_shot = 0
-                    mob1_dmg = 0.1
+                    mob1_dmg = 0.6
                     door = False
 
         if lvl == 1:
@@ -507,10 +472,9 @@ while run:
                         CURRENTMOB1 = PIROS_MOB1
                         CURRENTMOB2 = PIROS_MOB1
                         CURRENTMOB3 = PIROS_MOB1
-                        HP = HP + 25
-                        VEL_MOB1 = 2
-                        VEL_MOB2 = 2
-                        VEL_MOB3 = 2
+                        VEL_MOB1 = 2.5
+                        VEL_MOB2 = 2.5
+                        VEL_MOB3 = 2.5
                         hp_up_txt = False
                         speed_up_txt = False
                         dmg_up_txt = False
@@ -523,7 +487,6 @@ while run:
                         bullets_up = []
                         shot_delay = 0
                         next_shot = 0
-                        print(random_drop)
                         door = False
         elif lvl == 2:
             if mob1_hp <= 0 and mob2_hp <= 0:
@@ -546,10 +509,9 @@ while run:
                         CURRENTMOB1 = PIROS_MOB2
                         CURRENTMOB2 = PIROS_MOB2
                         CURRENTMOB3 = PIROS_MOB2
-                        HP = HP + 25
-                        VEL_MOB1 = 2
-                        VEL_MOB2 = 2
-                        VEL_MOB3 = 2
+                        VEL_MOB1 = 2.5
+                        VEL_MOB2 = 2.5
+                        VEL_MOB3 = 2.5
                         hp_up_txt = False
                         speed_up_txt = False
                         dmg_up_txt = False
@@ -562,7 +524,6 @@ while run:
                         bullets_up = []
                         shot_delay = 0
                         next_shot = 0
-                        print(random_drop)
                         door = False
         elif lvl == 3:
             if mob1_hp <= 0 and mob2_hp <= 0 and mob3_hp <= 0:
@@ -585,13 +546,9 @@ while run:
                         CURRENTMOB1 = PIROS_MOB3
                         CURRENTMOB2 = PIROS_MOB3
                         CURRENTMOB3 = PIROS_MOB3
-                        HP = HP + 25
-                        VEL_MOB1 = 2
-                        VEL_MOB2 = 2
-                        VEL_MOB3 = 2
-                        hp_up_txt = False
-                        speed_up_txt = False
-                        dmg_up_txt = False
+                        VEL_MOB1 = 2.5
+                        VEL_MOB2 = 2.5
+                        VEL_MOB3 = 2.5
                         opened = False
                         opened_sound = False
                         random_drop = random.randrange(1,4)
@@ -601,17 +558,20 @@ while run:
                         bullets_up = []
                         shot_delay = 0
                         next_shot = 0
-                        print(random_drop)
                         door = False
 
-    elif lvl == 4 or lvl == 9 or lvl == 14 or lvl == 19:
+    elif lvl == 4 or lvl == 9 or lvl == 10:
         if mob1_hp <= 0 and mob2_hp <= 0 and mob3_hp <= 0:
             door = True
             if right.x > 780:
                 if 245 > right.y > 170:
                     if lvl == 4:
                         CURRENTBOSS = PIROS_BOSS
-                        
+                    if lvl == 9:
+                        CURRENTBOSS = ZOLD_BOSS
+                    if lvl == 10:
+                        CURRENTBOSS = VARAZSLO
+
                     right.x = 20
                     right.y = 200
                     lvl = lvl + 1
@@ -629,14 +589,12 @@ while run:
                     VEL_MOB2 = 0
                     VEL_MOB3 = 0
                     boss_hp = 200
-                    pygame.mixer.music.stop()
-                    mixer.music.load(os.path.join("images", "lvl4music.wav"))
-                    mixer.music.set_volume(0.5)
-                    mixer.music.play(-1)
+                    boss_x = 400
+                    boss_y = 200
+                    boss_dmg = 5
+                    VEL_BOSS = 3
                     opened_sound = False
-                    #CURRENTMOB1.fill(TRANSPARENT)
-                    #CURRENTMOB2.fill(TRANSPARENT)
-                    #CURRENTMOB3.fill(TRANSPARENT)
+                    opened = False  
                     bullets_left = []
                     bullets_right = []
                     bullets_down = []
@@ -679,10 +637,9 @@ while run:
                     mob1_hp = 150
                     mob2_hp = 150
                     mob3_hp = 150
-                    HP = HP + 25
-                    VEL_MOB1 = 2.3
-                    VEL_MOB2 = 2.3
-                    VEL_MOB3 = 2.3
+                    VEL_MOB1 = 2.6
+                    VEL_MOB2 = 2.6
+                    VEL_MOB3 = 2.6
                     hp_up_txt = False
                     speed_up_txt = False
                     dmg_up_txt = False
@@ -695,90 +652,22 @@ while run:
                     bullets_up = []
                     shot_delay = 0
                     next_shot = 0
-                    print(random_drop)
                     door = False
-    
-    elif 14 > lvl > 9:
-        if mob1_hp <= 0 and mob2_hp <= 0 and mob3_hp <= 0:
+    if lvl == 11:
+        if boss_hp <= 0:
             door = True
             if right.x > 780:
                 if 245 > right.y > 170:
-                    right.x = 20
-                    right.y = 200
-                    lvl = lvl + 1
-                    time.sleep(0.5)
-                    mob1_x = random.randrange(900)
-                    mob1_y = random.randrange(400)
-                    mob2_x = random.randrange(900)
-                    mob2_y = random.randrange(400)
-                    mob3_x = random.randrange(900)
-                    mob3_y = random.randrange(400)
-                    mob1_hp = 150
-                    mob2_hp = 150
-                    mob3_hp = 150
-                    CURRENTMOB1 = MOB3
-                    CURRENTMOB2 = MOB3
-                    CURRENTMOB3 = MOB3
-                    HP = HP + 25
-                    VEL_MOB1 = 2.5
-                    VEL_MOB2 = 2.5
-                    VEL_MOB3 = 2.5
-                    hp_up_txt = False
-                    speed_up_txt = False
-                    dmg_up_txt = False
-                    opened = False
-                    opened_sound = False
-                    random_drop = random.randrange(1,4)
-                    bullets_left = []
-                    bullets_right = []
-                    bullets_down = []
-                    bullets_up = []
-                    shot_delay = 0
-                    next_shot = 0
-                    print(random_drop)
-                    door = False
+                    lvl += 1
+                    right.x = 30
+                    right.y = 400
+                    
+    if lvl == 12:
+        right.x += 1
+        if right.x == 750:
+            pygame.quit()
 
-    elif 19 > lvl > 14:
-        if mob1_hp <= 0 and mob2_hp <= 0 and mob3_hp <= 0:
-            door = True
-            if right.x > 780:
-                if 245 > right.y > 170:
-                    right.x = 20
-                    right.y = 200
-                    lvl = lvl + 1
-                    time.sleep(0.5)
-                    mob1_x = random.randrange(900)
-                    mob1_y = random.randrange(400)
-                    mob2_x = random.randrange(900)
-                    mob2_y = random.randrange(400)
-                    mob3_x = random.randrange(900)
-                    mob3_y = random.randrange(400)
-                    mob1_hp = 150
-                    mob2_hp = 150
-                    mob3_hp = 150
-                    CURRENTMOB1 = MOB2
-                    CURRENTMOB2 = MOB2
-                    CURRENTMOB3 = MOB2
-                    HP = HP + 25
-                    VEL_MOB1 = 2.5
-                    VEL_MOB2 = 2.5
-                    VEL_MOB3 = 2.5
-                    hp_up_txt = False
-                    speed_up_txt = False
-                    dmg_up_txt = False
-                    opened = False
-                    opened_sound = False
-                    random_drop = random.randrange(1,4)
-                    bullets_left = []
-                    bullets_right = []
-                    bullets_down = []
-                    bullets_up = []
-                    shot_delay = 0
-                    next_shot = 0
-                    print(random_drop)
-                    door = False
-        
-    
+
     if right.x - 50 < mob1_x < right.x + 50 and right.y - 90 < mob1_y < right.y + 50 or right.x == mob1_x and right.y == mob1_y:
         if mob1_hp <= 0:
             HP = HP
@@ -823,7 +712,6 @@ while run:
                     if opened != True:
                         VEL_RIGHT += 0.3
                         speed_up_txt = True
-                        print(VEL_RIGHT)
                         opened = True
                     else:
                         pass
@@ -840,19 +728,17 @@ while run:
                 elif random_drop == 3:
                     if opened != True:
                         right_dmg += 5
-                        print(right_dmg)
                         dmg_up_txt = True
                         opened = True
                     else:
                         pass
                     
-    if 5 > lvl > 2 or 10 > lvl > 5 or 15 > lvl > 10 or 20 > lvl > 15:
+    if 5 > lvl > 2 or 10 > lvl > 5:
         if mob1_hp <= 0 and mob2_hp <= 0 and mob3_hp <= 0:
             if right.colliderect(chest):
                 if random_drop == 1:
                     if opened != True:
                         VEL_RIGHT += 0.3
-                        print(VEL_RIGHT)
                         opened = True
                     else:
                         pass
@@ -868,21 +754,19 @@ while run:
                 elif random_drop == 3:
                     if opened != True:
                         right_dmg += 5
-                        print(right_dmg)
                         opened = True
                     else:
                         pass
 
-    if lvl == 5 or lvl == 10 or lvl == 15 or lvl == 20:
+    if lvl == 5:
         if boss_hp <= 0:
-            CURRENTBOSS = MOB_DEAD
+            CURRENTBOSS = KOPORSO
             VEL_BOSS = 0
             boss_dmg = 0
             if right.colliderect(chest):
                 if random_drop == 1:
                     if opened != True:
                         VEL_RIGHT += 0.5
-                        print(VEL_RIGHT)
                         opened = True
                     else:
                         pass
@@ -895,7 +779,6 @@ while run:
                 elif random_drop == 3:
                     if opened != True:
                         right_dmg += 5
-                        print(right_dmg)
                         opened = True
                     else:
                         pass
@@ -903,17 +786,26 @@ while run:
 
     if mob1_hp <= 0:
         VEL_MOB1 = 0
+        CURRENTMOB1 = KOPORSO
+
     
     if mob2_hp <= 0:
         VEL_MOB2 = 0
+        CURRENTMOB2 = KOPORSO
     
     if mob3_hp <= 0:
         VEL_MOB3 = 0
+        CURRENTMOB3 = KOPORSO
+    
+    if boss_hp <= 0:
+        VEL_BOSS = 0
+        CURRENTBOSS = KOPORSO
+        
 
     if HP < 0:
-        CURRENTRIGHT = C_X
+        CURRENTRIGHT = KOPORSO
         VEL_RIGHT = VEL_RIGHT - VEL_RIGHT 
-        time.sleep(1)
+        time.sleep(2)
         gameover = True
 
     keys_pressed = pygame.key.get_pressed()
@@ -929,7 +821,6 @@ while run:
             VEL_RIGHT = 4
             right.x = 700
             right.y = 100
-            CURRENTRIGHT = DOWNMOVE1
             boss_dmg = 0
             boss_hp = 200
 
@@ -940,11 +831,11 @@ while run:
     elif lvl == 2:
         mob2_dmg = 0.1
         mob3_dmg = 0
-    elif 5 > lvl > 2 or 10 > lvl > 5 or 15 > lvl > 10 or 20 > lvl > 15:
+    elif 5 > lvl > 2 or 10 > lvl > 5:
         mob2_dmg = 0.1
         mob3_dmg = 0.1
 
-    elif lvl == 5 or lvl == 10 or lvl == 15 or lvl == 20:
+    elif lvl == 5 or lvl == 10 or lvl == 11:
         boss_dmg = 0.1
         mob1_dmg = 0
         mob2_dmg = 0
@@ -972,7 +863,7 @@ while run:
         elif mob2_x < right.x:
             mob2_x += VEL_MOB2
 
-    if 5 > lvl > 2 or 10 > lvl > 5 or 15 > lvl > 10 or 20 > lvl > 15:
+    if 5 > lvl > 2 or 10 > lvl > 5:
         if mob2_y > right.y:
             mob2_y -= VEL_MOB2
         elif mob2_y < right.y:
@@ -993,7 +884,7 @@ while run:
         elif mob3_x < right.x:
             mob3_x += VEL_MOB3
     
-    if lvl == 5 or lvl == 10 or lvl == 15 or lvl == 20:
+    if lvl == 5 or lvl == 10 or lvl == 11:
         if boss_y > right.y + 2:
             boss_y -= VEL_BOSS
         elif boss_y < right.y + 2:
@@ -1013,11 +904,8 @@ while run:
                 right.x -= VEL_RIGHT
             if keys_pressed[pygame.K_d] and right.x + VEL_RIGHT < WIDTH-CHARACTER_WIDTH :
                 right.x += VEL_RIGHT
-        
 
-        
-
-    if lvl > -1:
+    if 12 > lvl > -1:
         keys_pressed = pygame.key.get_pressed()
         if keys_pressed[pygame.K_a] and right.x - VEL_RIGHT > 0:
             right.x -= VEL_RIGHT
@@ -1099,7 +987,7 @@ while run:
         if bullet_up.x > WIDTH or bullet_up.x < 0 or bullet_up.y > HEIGHT or bullet_up.y < 0:
             bullets_up.remove(bullet_up)
 
-    if 5 > lvl > 0 or 10 > lvl > 5 or 15 > lvl > 10 or 20 > lvl > 15:
+    if 5 > lvl > 0 or 10 > lvl > 5:
         for bullet_right in bullets_right:
             if bullet_right.x - 50 < mob1_x < bullet_right.x + 50 and bullet_right.y - 90< mob1_y < bullet_right.y + 50 or bullet_right.x == mob1_x and bullet_right.y == mob1_y:
                 mob1_hp -= right_dmg
@@ -1119,7 +1007,7 @@ while run:
             if bullet_up.x - 50 < mob1_x < bullet_up.x + 50 and bullet_up.y - 90< mob1_y < bullet_up.y + 50 or bullet_up.x == mob1_x and bullet_up.y == mob1_y:
                 mob1_hp -= right_dmg
                 bullets_up.remove(bullet_up)
-    if 5 > lvl > 1 or 10 > lvl > 5 or 15 > lvl > 10 or 20 > lvl > 15:
+    if 5 > lvl > 1 or 10 > lvl > 5:
         for bullet_right in bullets_right:
             if bullet_right.x - 50 < mob2_x < bullet_right.x + 50 and bullet_right.y - 90< mob2_y < bullet_right.y + 50 or bullet_right.x == mob2_x and bullet_right.y == mob2_y:
                 mob2_hp -= right_dmg
@@ -1140,7 +1028,7 @@ while run:
                 mob2_hp -= right_dmg
                 bullets_up.remove(bullet_up)
     
-    if 5 > lvl > 2 or 10 > lvl > 5 or 15 > lvl > 10 or 20 > lvl > 15:
+    if 5 > lvl > 2 or 10 > lvl > 5:
         for bullet_right in bullets_right:
             if bullet_right.x - 50 < mob3_x < bullet_right.x + 50 and bullet_right.y - 90< mob3_y < bullet_right.y + 50 or bullet_right.x == mob3_x and bullet_right.y == mob3_y:
                 mob3_hp -= right_dmg
@@ -1161,7 +1049,7 @@ while run:
                 mob3_hp -= right_dmg
                 bullets_up.remove(bullet_up)
     #print(boss_x, boss_x + 100)
-    if lvl == 5 or lvl == 10 or lvl == 15 or lvl == 20:
+    if lvl == 5 or lvl == 10 or lvl == 11:
         for bullet_right in bullets_right:
             if boss_x < bullet_right.x < boss_x + 150 and boss_y < bullet_right.y < boss_y + 180 or bullet_right.x == boss_x and bullet_right.y == boss_y:
                 boss_hp -= right_dmg
@@ -1181,9 +1069,6 @@ while run:
             if boss_x < bullet_up.x < boss_x + 150 and boss_y < bullet_up.y < boss_y + 150 or bullet_up.x == boss_x and bullet_up.y == boss_y:
                 boss_hp -= right_dmg
                 bullets_up.remove(bullet_up)
-
-
-
 
     keys_pressed = pygame.key.get_pressed()
     handle_bullets(bullets_right,bullets_down,bullets_left,bullets_up, right, mob1, mob1_hp,  bullet_right, bullet_left, bullet_up, bullet_down, mob2, mob2_hp, mob3, mob3_hp)
