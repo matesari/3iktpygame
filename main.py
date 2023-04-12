@@ -4,10 +4,7 @@ import random
 import time
 from pygame import mixer
 
-
 pygame.font.init()
-pygame.font.init()
-pygame.mixer.init()
 
 #import colors
 GREEN = (0, 128, 0)
@@ -319,12 +316,6 @@ def rajzok(right, bullets_right,bullets_down,bullets_left,bullets_up, bullet_rig
 
     pygame.display.update()
 
-chest_open_sound = mixer.Sound(os.path.join("images", "chestopen.wav"))
-chest_open_sound.set_volume(1)
-
-shoot_sound = mixer.Sound(os.path.join("images", "shoot.wav"))
-shoot_sound.set_volume(1)
-
 #main game
 chest = pygame.Rect(400, 200, CHARACTER_WIDTH // 2, CHARACTER_HEIGHT// 2)
 chest_opened = pygame.Rect(400, 200, CHARACTER_WIDTH, CHARACTER_HEIGHT)
@@ -370,7 +361,6 @@ while run:
                 if opened_sound == False:
                     for i in range(100):
                         i += 1
-                    chest_open_sound.play()
                     opened_sound = True
                 else:
                     pass
@@ -380,7 +370,6 @@ while run:
                 if opened_sound == False:
                     for i in range(100):
                         i += 1
-                    chest_open_sound.play()
                     opened_sound = True
                 else:
                     pass
@@ -400,7 +389,6 @@ while run:
                 if opened_sound == False:
                     for i in range(100):
                         i += 1
-                    chest_open_sound.play()
                     opened_sound = True
                 else:
                     pass
@@ -956,19 +944,15 @@ while run:
     if keys_pressed[pygame.K_SPACE]:
         if shot_delay > next_shot:
             if look == "right":
-                shoot_sound.play()   
                 bullet_right = pygame.Rect(right.x + CHARACTER_WIDTH//2, right.y + 20, 15, 15)
                 bullets_right.append(bullet_right)
             if look == "left":
-                shoot_sound.play()
                 bullet_left = pygame.Rect(right.x + CHARACTER_WIDTH//2, right.y + 20, 15, 15)
                 bullets_left.append(bullet_left)
             if look == "down":
-                shoot_sound.play()
                 bullet_down = pygame.Rect(right.x + CHARACTER_WIDTH//2, right.y + 20, 15, 15)
                 bullets_down.append(bullet_down)
             if look == "up":
-                shoot_sound.play()
                 bullet_up = pygame.Rect(right.x + CHARACTER_WIDTH//2, right.y + 20, 15, 15)
                 bullets_up.append(bullet_up)
             next_shot = shot_delay + 30
